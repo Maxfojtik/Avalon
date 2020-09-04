@@ -1,0 +1,155 @@
+
+body {
+  margin-bottom: 60px;
+  background-color: #262626;
+  color: #e0e0e0;
+  text-align: center;
+  font-family: sans-serif, Arial;
+}
+
+/* Join/Create game page */
+
+#join-game {
+  width: 50%;
+  float: left;
+}
+#make-game {
+  margin-left: 50%
+}
+#join-game-button {
+  background-color: #0099ff;
+  border: none;
+  color: white;
+  padding: 10px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 30px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border: 2px solid #191919;
+  border-radius: 4px;
+  box-shadow: 0px 4px 4px rgb(18, 18, 18);
+}
+#join-game-button[disabled=disabled] {
+  opacity: .4;
+  box-shadow: none;
+  cursor: default;
+}
+
+
+.player-select-radio {
+    background-color: #303030;
+    border: none;
+    color: white;
+    padding: 16px 120px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border: 2px solid #202020;
+    border-radius: 12px;
+}
+
+.player-select-radio:hover {
+    background-color: #a0a0a0;
+    color: white;
+}
+
+#nameinput {
+    background-color: #202020;
+    border: none;
+    color: #f0f0f0;
+    padding: 6px 12px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 30px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border: 1px solid #a0a0a0;
+    border-radius: 12px;
+}
+
+#character-select {
+    padding-top: 50px;
+    margin-bottom: 30px
+}
+
+.character-option {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+form {
+    text-align: center;
+}
+
+[type=radio] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+[type=radio] + img {
+    cursor: pointer;
+    margin: 2px; /* This is un-set in checked, which makes things not move when the border size is adjusted for checked */
+    max-width: 200px;
+    max-height: 400px;
+    padding: 10px;
+}
+
+[type=radio]:checked + img {
+    background-color: #353535;
+    border: 2px solid #0000F0;
+    border-radius: 8px;
+    margin: 0px;
+}
+
+#currently-pressed {
+    min-width: 40%;
+    min-height: 90px;
+    border: 2px solid #191919;
+    border-radius: 15px;
+    margin-left: 20%;
+    margin-right: 20%;
+    padding: 5px;
+}
+
+.key {
+    border: 2px solid #202020;
+    border-radius: 10px;
+    margin: 5px;
+    font-family: sans-serif, Arial;
+    font-size: 16px;
+    display: inline-block;
+    padding: 10px;
+}
+
+#leave-button {
+    background-color: #0055aa;
+    border: none;
+    color: white;
+    padding: 10px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 30px;
+    margin: 4px 2px;
+    margin-top: 30px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border: 2px solid #191919;
+    border-radius: 4px;
+    box-shadow: 0px 4px 4px rgb(18, 18, 18);
+}
+
+#status {
+    margin-top: 60px;
+    margin-bottom: 35px;
+}
