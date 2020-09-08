@@ -10,8 +10,18 @@ function joinGame() {
 function createGame() {
 
 }
-// Checks if the room code is valid via string checking and polling server. Enables join button only when valid
-$('#input-game-code').change(function() {
-  alert('Changed!');
-  console.log("Changed");
+$(document).ready(function(){
+	// Checks if the room code is valid via string checking and polling server. Enables join button only when valid
+	$('#input-game-code').on('input', function() {
+	  text = $('#input-game-code').val().toUpperCase(); // Get text and make capital
+	  isValid = (/[A-Z]{4}/).test(text) // Is 4 capital letters
+	  // if (isValid)
+	  	// isValid = connection.isRoomOpen()
+	  if (isValid) {
+	  	$("#join-game-button").removeAttr('disabled')
+	  }
+	  else {
+	  	$("#join-game-button").prop("disabled", "disabled");
+	  }
+	});
 });
