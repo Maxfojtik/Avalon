@@ -8,6 +8,11 @@
 
   function init()
   {
+	  if (history.pushState) 
+	  {
+		var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?test=test';
+		window.history.pushState({path:newurl},'',newurl);
+	}
     output = document.getElementById("output");
     testWebSocket();
   }
@@ -35,7 +40,7 @@
   function onMessage(evt)
   {
     writeToScreen('<span style="color: blue;">RESPONSE: ' + evt.data+'</span>');
-    websocket.close();
+    //websocket.close();
   }
 
   function onError(evt)
