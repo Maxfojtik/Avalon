@@ -2,7 +2,7 @@
 var wsUri = "ws://74.140.3.27:12389";
 
 class BackendConnection {
-	constructor(var sessionId) {
+	constructor(sessionId) {
 		this.websocket = new WebSocket(wsUri);
 		this.websocket.onopen = function(evt) { this.onOpen(evt, sessionId) };
 		this.websocket.onclose = function(evt) { this.onClose(evt) };
@@ -32,7 +32,7 @@ class BackendConnection {
 		console.log("SENT: " + message);
 	}
 
-	sendJoinGame(var name, var sessionId, var gameId)
+	sendJoinGame(name, sessionId, gameId)
 	{
 		
 	}
