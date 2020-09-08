@@ -2,18 +2,17 @@
 var wsUri = "ws://74.140.3.27:12389";
 
 class BackendConnection {
-
-	constructor() {
+	constructor(var sessionId) {
 		this.websocket = new WebSocket(wsUri);
-		this.websocket.onopen = function(evt) { this.onOpen(evt) };
+		this.websocket.onopen = function(evt) { this.onOpen(evt, sessionId) };
 		this.websocket.onclose = function(evt) { this.onClose(evt) };
 		this.websocket.onmessage = function(evt) { this.onMessage(evt) };
 		this.websocket.onerror = function(evt) { this.onError(evt) };
 	}
 
-	onOpen(evt) {
+	onOpen(evt, sessionId) {
 		console.log("CONNECTED");
-		doSend("WebSocket rocks");
+		send("PlayerConnect|"+sessionId);
 	}
 
 	onClose(evt) {
@@ -28,9 +27,13 @@ class BackendConnection {
 		console.log('ERROR: ' + evt.data);
 	}
 
-	doSend(message) {
+	send(message) {
 		websocket.send(message);
 		console.log("SENT: " + message);
 	}
 
+	sendJoinGame(var name, var sessionId, var gameId)
+	{
+		
+	}
 }
