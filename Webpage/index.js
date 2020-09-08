@@ -1,5 +1,5 @@
 
-var connection = new backend.BackendConnection()
+var connection = new BackendConnection()
 
 // Joins a game from the start page. Will need to find the room code
 function joinGame() {
@@ -11,7 +11,7 @@ function createGame() {
 
 }
 // Checks if the room code is valid via string checking and polling server. Enables join button only when valid
-$('#input-game-code').change(function(e) {
+$('#input-game-code').change(function() {
   alert('Changed!');
   console.log("Changed");
 });
