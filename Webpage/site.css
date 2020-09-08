@@ -16,7 +16,7 @@ body {
 #make-game {
   margin-left: 50%
 }
-#join-game-button {
+.blue-button {
   background-color: #0099ff;
   border: none;
   color: white;
