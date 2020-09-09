@@ -2,9 +2,9 @@
 var connection = new BackendConnection()
 
 const States = {
-	MAIN_MENU: "main menu",
-	LOBBY: "lobby",
-	GAME: "game"
+	MAIN_MENU: "InMainMenu",
+	LOBBY: "InLobby",
+	GAME: "InGame"
 };
 
 function setState(state) {
