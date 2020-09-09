@@ -74,6 +74,10 @@ body {
   border-radius: 12px;
 }
 
+.screen {
+  display: none;
+}
+
 #character-select {
     padding-top: 50px;
     margin-bottom: 30px
