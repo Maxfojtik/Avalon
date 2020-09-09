@@ -1,18 +1,20 @@
 
-var wsUri = "ws://74.140.3.27:12389";
+var wsUri = "ws://localhost:12389";
 
 class BackendConnection {
 	constructor(sessionId) {
+		this.sesid = sessionId;
 		this.websocket = new WebSocket(wsUri);
-		this.websocket.onopen = function(evt) { this.onOpen(evt, sessionId) };
-		this.websocket.onclose = function(evt) { this.onClose(evt) };
-		this.websocket.onmessage = function(evt) { this.onMessage(evt) };
-		this.websocket.onerror = function(evt) { this.onError(evt) };
+		var self = this;
+		this.websocket.onopen = function(evt) { self.onOpen(evt) };
+		this.websocket.onclose = function(evt) { self.onClose(evt) };
+		this.websocket.onmessage = function(evt) { self.onMessage(evt) };
+		this.websocket.onerror = function(evt) { self.onError(evt) };
 	}
 
-	onOpen(evt, sessionId) {
+	onOpen(evt) {
 		console.log("CONNECTED");
-		send("PlayerConnect|"+sessionId);
+		this.send("PlayerConnect|"+this.sesid);
 	}
 
 	onClose(evt) {
@@ -20,7 +22,12 @@ class BackendConnection {
 	}
 
 	onMessage(evt) {
-		console.log('RESPONSE: ' + evt.data);
+		console.log('<-: ' + evt.data);
+		var params = evt.data.split("|");
+		if(params[0]=="UpdateState")
+		{
+			setState(params[1]);
+		}
 	}
 
 	onError(evt) {
@@ -28,8 +35,8 @@ class BackendConnection {
 	}
 
 	send(message) {
-		websocket.send(message);
-		console.log("SENT: " + message);
+		this.websocket.send(message);
+		console.log("->: " + message);
 	}
 
 	sendJoinGame(name, sessionId, gameId)

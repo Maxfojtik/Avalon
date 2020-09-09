@@ -1,5 +1,4 @@
-
-var connection = new BackendConnection("test")
+var connection = new BackendConnection("Matthew")
 
 // Joins a game from the start page. Will need to find the room code
 function joinGame() {
