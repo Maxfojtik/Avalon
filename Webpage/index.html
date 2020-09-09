@@ -11,17 +11,17 @@
 
 	<body>
 
-		<div id="main-menu-screen" class="screen">
+		<div id="main-menu-screen" class="screen force-invisible">
 			<h1 style="margin-top: 70px; margin-bottom: 70px;">Avalon</h1>
 
-			<div id="join-game">
+			<div class="left-column">
 				<h3>Join Game</h3>
 				<label for="game_code">Game Code:</label><br>
-				<input type="text" class="name-input" id="input-game-code" maxlength="4"><br>
+				<input type="text" class="fancy-input" id="input-game-code" maxlength="4"><br>
 				<button onclick="joinGame()" class="blue-button" id="join-game-button" disabled>Join Game</button>
 			</div>
 
-			<div id="make-game">
+			<div class="right-column">
 				<h3>Make Game</h3>
 				<button onclick="createGame()" class="blue-button">Create Game</button>
 			</div>
@@ -33,7 +33,12 @@
 			<p>If it still hasn't connected, refresh or give up</p>
 		</div>
 
-		<div id="lobby-screen" class="screen">
+		<div id="lobby-screen" class="screen force-visible">
+			<h2>Avalon Game Lobby</h2>
+			<h1 id="lobby-id"></h1>
+			<p id="lobby-link">link</p>
+			<label>Your Name:</label>
+			<input type="text" maxlength="30">
 		</div>
 
 		<div id="game-screen" class="screen">

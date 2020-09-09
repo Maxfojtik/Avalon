@@ -1,4 +1,15 @@
 
+/* Special */
+
+.force-invisible {
+  display: none !important;
+}
+.force-visible {
+  display: block !important;
+}
+
+/* General */
+
 body {
   margin-bottom: 60px;
   background-color: #262626;
@@ -7,15 +18,15 @@ body {
   font-family: sans-serif, Arial;
 }
 
-/* Join/Create game page */
-
-#join-game {
+.left-column {
   width: 50%;
   float: left;
 }
-#make-game {
+.right-column {
   margin-left: 50%
 }
+
+/* Join/Create game page */
 .blue-button {
   background-color: #0099ff;
   border: none;
@@ -59,19 +70,22 @@ body {
     color: white;
 }
 
-.name-input {
+.fancy-input {
   background-color: #202020;
   border: none;
   color: #f0f0f0;
   padding: 6px 12px;
   text-decoration: none;
   display: inline-block;
-  font-size: 30px;
+  font-size: 60px;
   margin: 4px 2px;
   transition-duration: 0.4s;
   cursor: pointer;
   border: 1px solid #a0a0a0;
   border-radius: 12px;
+  width: 200px;
+  text-transform: uppercase;
+  text-align: center;
 }
 
 .screen {

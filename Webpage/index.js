@@ -18,6 +18,8 @@ function setState(state) {
 			$('#main-menu-screen').hide()
 			$('#lobby-screen').show()
 			$('#game-screen').hide()
+			// Set lobby ID at top
+			// Set link at top
 			break;
 		case States.GAME:
 			$('#main-menu-screen').hide()
@@ -29,7 +31,8 @@ function setState(state) {
 
 // Joins a game from the start page. Will need to find the room code
 function joinGame() {
-	websocket.send("ABCD");
+	gameID = $("#input-game-code").val().toUpperCase()
+	connection.send(gameID);
 	console.log("Joining game")
 }
 // Creates a game from the start page. Will need to ask server for a room code then go to that room
