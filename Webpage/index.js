@@ -13,11 +13,13 @@ function setState(state) {
 			$('#main-menu-screen').show()
 			$('#lobby-screen').hide()
 			$('#game-screen').hide()
+			// Clear join game text box
 			break;
 		case States.LOBBY:
 			$('#main-menu-screen').hide()
 			$('#lobby-screen').show()
 			$('#game-screen').hide()
+			// Clear lobby
 			// Set lobby ID at top
 			// Set link at top
 			break;
@@ -31,12 +33,28 @@ function setState(state) {
 
 // Joins a game from the start page. Will need to find the room code
 function joinGame() {
-	gameID = $("#input-game-code").val().toUpperCase()
-	connection.send(gameID);
+	gameId = $("#input-game-code").val().toUpperCase()
+	connection.sendJoinGame(sessionId, gameId);
 	console.log("Joining game")
 }
 // Creates a game from the start page. Will need to ask server for a room code then go to that room
 function createGame() {
+
+}
+// To be called after validating text string in on input for game lobby join text input
+function postCheckedLobbyOpen(isOpen) {
+	if (isOpen) {
+  	$("#join-game-button").removeAttr('disabled')
+  }
+  else {
+  	$("#join-game-button").prop("disabled", "disabled");
+  }
+}
+
+function addPlayerToLobby() {
+
+}
+function changePlayerNameLobby() {
 
 }
 
@@ -45,13 +63,9 @@ $(document).ready(function(){
 	$('#input-game-code').on('input', function() {
 	  text = $('#input-game-code').val().toUpperCase(); // Get text and make capital
 	  isValid = (/[A-Z]{4}/).test(text) // Is 4 capital letters
-	  // if (isValid)
-	  	// isValid = connection.isRoomOpen()
-	  if (isValid) {
-	  	$("#join-game-button").removeAttr('disabled')
-	  }
-	  else {
+	  if (isValid)
+	  	connection.checkLobbyOpen(text) // This will initialize a check with backend, resulting in call to postCheckedLobbyOpen(isOpen)
+	  else
 	  	$("#join-game-button").prop("disabled", "disabled");
-	  }
 	});
 });
