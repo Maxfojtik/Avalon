@@ -11,14 +11,14 @@
 
 	<body>
 
-		<div id="start-page">
+		<div id="main-menu-screen">
 			<h1 style="margin-top: 70px; margin-bottom: 70px;">Avalon</h1>
 
 			<div id="join-game">
 				<h3>Join Game</h3>
 				<label for="game_code">Game Code:</label><br>
-				<input type="text" id="input-game-code" maxlength="4"><br>
-				<button onclick="joinGame()" class="blue-button">Join Game</button>
+				<input type="text" class="name-input" id="input-game-code" maxlength="4"><br>
+				<button onclick="joinGame()" class="blue-button" id="join-game-button" disabled>Join Game</button>
 			</div>
 
 			<div id="make-game">
@@ -28,8 +28,10 @@
 
 		<div>
 
-		<div id="in-game">
+		<div id="lobby-screen">
+		</div>
 
+		<div id="game-screen">
 		</div>
 
 	</body>

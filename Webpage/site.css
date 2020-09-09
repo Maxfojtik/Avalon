@@ -32,12 +32,11 @@ body {
   border-radius: 4px;
   box-shadow: 0px 4px 4px rgb(18, 18, 18);
 }
-#blue-button[disabled=disabled] {
+.blue-button:disabled {
   opacity: .4;
   box-shadow: none;
   cursor: default;
 }
-
 
 .player-select-radio {
     background-color: #303030;
@@ -60,19 +59,19 @@ body {
     color: white;
 }
 
-#nameinput {
-    background-color: #202020;
-    border: none;
-    color: #f0f0f0;
-    padding: 6px 12px;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 30px;
-    margin: 4px 2px;
-    transition-duration: 0.4s;
-    cursor: pointer;
-    border: 1px solid #a0a0a0;
-    border-radius: 12px;
+.name-input {
+  background-color: #202020;
+  border: none;
+  color: #f0f0f0;
+  padding: 6px 12px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 30px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border: 1px solid #a0a0a0;
+  border-radius: 12px;
 }
 
 #character-select {
