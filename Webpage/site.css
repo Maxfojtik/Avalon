@@ -30,6 +30,18 @@ body {
   opacity: 0;
 }
 
+/* Connecting */
+.connecting {
+  margin: 0;
+  position: absolute;
+  top: 33%;
+  left: 50%;
+  -ms-transform: translate(-50%, -33%);
+  transform: translate(-50%, -33%);
+  transition: opacity 500ms;
+  opacity:1;
+}
+
 /* Join/Create game page */
 .blue-button {
   background-color: #0099ff;
