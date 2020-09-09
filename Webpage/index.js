@@ -1,5 +1,7 @@
 var connection = new BackendConnection("Matthew")
 
+var connected = false;
+
 const States = {
 	MAIN_MENU: "InMainMenu",
 	LOBBY: "InLobby",
@@ -7,22 +9,26 @@ const States = {
 };
 
 function setState(state) {
-	$('#connecting-screen').hide()
+	if(!connected)
+	{
+		connected = true;
+		$('#connecting-screen').find("h2").text("Connected.");
+		$('#connecting-screen').fadeTo(100, 0, function() { $('#connecting-screen').hide() });
+	}
+	$('#lobby-screen').fadeTo(100, 0)
+	$('#game-screen').fadeTo(100, 0)
+	$('#main-menu-screen').fadeTo(100, 0, function() { setStateFinal(state) })
+}
+function setStateFinal(state) {
 	switch (state) {
 		case States.MAIN_MENU:
-			$('#main-menu-screen').show()
-			$('#lobby-screen').hide()
-			$('#game-screen').hide()
+			$('#main-menu-screen').fadeTo(300, 1)
 			break;
 		case States.LOBBY:
-			$('#main-menu-screen').hide()
-			$('#lobby-screen').show()
-			$('#game-screen').hide()
+			$('#lobby-screen').fadeTo(300, 1)
 			break;
 		case States.GAME:
-			$('#main-menu-screen').hide()
-			$('#lobby-screen').hide()
-			$('#game-screen').show()
+			$('#game-screen').fadeTo(300, 1)
 			break;
 	}
 }
@@ -51,4 +57,8 @@ $(document).ready(function(){
 	  	$("#join-game-button").prop("disabled", "disabled");
 	  }
 	});
+	setTimeout(function(){
+		$("#connecting-screen").addClass('connecting')
+		$("#connecting-screen").removeClass('screen')
+	}, 5000);
 });
