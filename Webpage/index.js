@@ -7,7 +7,7 @@ const States = {
 	GAME: "game"
 };
 
-setState(state) {
+function setState(state) {
 	switch (state) {
 		case States.MAIN_MENU:
 			$('#main-menu-screen').show()
