@@ -1,6 +1,32 @@
 
 var connection = new BackendConnection()
 
+const States = {
+	MAIN_MENU: "main menu",
+	LOBBY: "lobby",
+	GAME: "game"
+};
+
+setState(state) {
+	switch (state) {
+		case States.MAIN_MENU:
+			$('#main-menu-screen').show()
+			$('#lobby-screen').hide()
+			$('#game-screen').hide()
+			break;
+		case States.LOBBY:
+			$('#main-menu-screen').hide()
+			$('#lobby-screen').show()
+			$('#game-screen').hide()
+			break;
+		case States.GAME:
+			$('#main-menu-screen').hide()
+			$('#lobby-screen').hide()
+			$('#game-screen').show()
+			break;
+	}
+}
+
 // Joins a game from the start page. Will need to find the room code
 function joinGame() {
 	websocket.send("ABCD");
