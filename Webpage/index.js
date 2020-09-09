@@ -8,6 +8,7 @@ const States = {
 };
 
 function setState(state) {
+	$('#connecting-screen').hide()
 	switch (state) {
 		case States.MAIN_MENU:
 			$('#main-menu-screen').show()
@@ -36,6 +37,7 @@ function joinGame() {
 function createGame() {
 
 }
+
 $(document).ready(function(){
 	// Checks if the room code is valid via string checking and polling server. Enables join button only when valid
 	$('#input-game-code').on('input', function() {
