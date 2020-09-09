@@ -28,6 +28,14 @@ class BackendConnection {
 		{
 			setState(params[1]);
 		}
+		if(params[0]=="LobbyOpen")
+		{
+			postCheckedLobbyOpen(params[1] == 'true');
+		}
+		if(params[0]=="GameId")
+		{
+			
+		}
 	}
 
 	onError(evt) {
@@ -43,8 +51,18 @@ class BackendConnection {
 		console.log("->: " + message);
 	}
 
-	sendJoinGame(name, sessionId, gameId)
+	sendJoinGame(sessionId, gameId)
 	{
-		
+		this.send("JoinGame|"+sessionId+"|"+gameId);
+	}
+	
+	sendCreateGame()
+	{
+		this.send("CreateGame");
+	}
+	
+	checkLobbyOpen(gameId)
+	{
+		this.send("LobbyOpen|"+gameId);
 	}
 }
