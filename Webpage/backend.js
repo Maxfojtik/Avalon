@@ -1,6 +1,6 @@
 
 var wsUri = "ws://localhost:12389";
-
+var connectionError = false;
 class BackendConnection {
 	constructor(sessionId) {
 		this.sesid = sessionId;
@@ -31,7 +31,11 @@ class BackendConnection {
 	}
 
 	onError(evt) {
-		console.log('ERROR: ' + evt.data);
+		console.log('ERROR: ' + evt.type);
+		connectionError = true;
+		$("#connecting-screen").hide();
+		$("#error-screen").addClass('connecting');
+		$("#error-screen").removeClass('screen');
 	}
 
 	send(message) {

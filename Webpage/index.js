@@ -13,7 +13,7 @@ function setState(state) {
 	{
 		connected = true;
 		$('#connecting-screen').find("h2").text("Connected.");
-		$('#connecting-screen').fadeTo(100, 0, function() { $('#connecting-screen').hide() });
+		$('#connecting-screen').fadeTo(100, 0, function() { $('#connecting-screen').hide(); $('#error-screen').hide()});
 	}
 	$('#lobby-screen').fadeTo(100, 0)
 	$('#game-screen').fadeTo(100, 0)
@@ -22,12 +22,18 @@ function setState(state) {
 function setStateFinal(state) {
 	switch (state) {
 		case States.MAIN_MENU:
+			$('#lobby-screen').hide();
+			$('#game-screen').hide();
 			$('#main-menu-screen').fadeTo(300, 1)
 			break;
 		case States.LOBBY:
+			$('#main-menu-screen').hide();
+			$('#game-screen').hide();
 			$('#lobby-screen').fadeTo(300, 1)
 			break;
 		case States.GAME:
+			$('#main-menu-screen').hide();
+			$('#lobby-screen').hide();
 			$('#game-screen').fadeTo(300, 1)
 			break;
 	}
@@ -59,7 +65,10 @@ $(document).ready(function(){
 	  }
 	});
 	setTimeout(function(){
-		$("#connecting-screen").addClass('connecting')
-		$("#connecting-screen").removeClass('screen')
-	}, 5000);
+		if(!connectionError)
+		{
+			$("#connecting-screen").addClass('connecting')
+			$("#connecting-screen").removeClass('screen')
+		}
+	}, 1000);
 });
