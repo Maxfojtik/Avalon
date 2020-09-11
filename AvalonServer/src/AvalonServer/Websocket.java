@@ -33,15 +33,21 @@ class Websockets extends WebSocketServer {
 			System.out.println("Creating a game");
 			GameRoom room = new GameRoom();
 			AvalonServer.gameRooms.add(room);
+			conn.send("GameId|"+room.id);
 		}
 		if(params[0].equals("JoinGame"))
 		{
-			System.out.println(params[1]+" joining "+params[2]);
 			Player thatPlayer = AvalonServer.getPlayerById(params[1]);
 			if(thatPlayer!=null)
 			{
+				System.out.println(thatPlayer+" joining "+params[2]);
 				GameRoom room = GameRoom.getById(params[2]);
-				room.playerJoined(thatPlayer);
+				if(room!=null)
+				{
+					room.playerJoined(thatPlayer);
+					thatPlayer.s = Player.State.InLobby;
+					conn.send("UpdateState|"+thatPlayer.s.toString());
+				}
 			}
 		}
 		if(params[0].equals("PlayerConnect"))
@@ -58,6 +64,62 @@ class Websockets extends WebSocketServer {
 				Player newPlayer = new Player(sessionId, conn);
 				AvalonServer.allPlayers.add(newPlayer);
 				conn.send("UpdateState|"+newPlayer.s.toString());
+			}
+		}
+		if(params[0].equals("LobbyOpen"))
+		{
+			System.out.print(params[1]+" open? ");
+			GameRoom room = GameRoom.getById(params[1]);
+			if(room!=null)
+			{
+				if(room.isLobbyOpen())
+				{
+					System.out.println("yup!");
+					conn.send("LobbyOpen|"+true);
+				}
+				else
+				{
+					System.out.println("nope");
+					conn.send("LobbyOpen|"+false);
+				}
+			}
+			else
+			{
+				System.out.println("nope");
+				conn.send("LobbyOpen|"+false);
+			}
+		}
+		if(params[0].equals("Admin"))//Admin|playerSessionId|Gameid|Action|parameters
+		{
+			GameRoom theRoom = GameRoom.getById(params[2]);
+			if(theRoom!=null)
+			{
+				Player thePlayer = AvalonServer.getPlayerById(params[1]);
+				if(thePlayer!=null && theRoom.isHost(thePlayer))
+				{
+					String action = params[3];
+					if(action.equals("Kick"))
+					{
+						Player targetPlayer = AvalonServer.getPlayerById(params[4]);
+						System.out.println(thePlayer+" kicked "+targetPlayer);
+						if(theRoom.isPlayerInGame(targetPlayer))
+						{
+							theRoom.removePlayer(targetPlayer);
+						}
+					}
+					if(action.equals("Promote"))
+					{
+						Player targetPlayer = AvalonServer.getPlayerById(params[4]);
+						if(theRoom.isPlayerInGame(targetPlayer))
+						{
+							theRoom.promote(targetPlayer);
+						}
+					}
+					if(action.equals("SetRoles"))
+					{
+						
+					}
+				}
 			}
 		}
 	}
