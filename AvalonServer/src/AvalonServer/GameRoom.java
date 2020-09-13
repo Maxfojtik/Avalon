@@ -55,6 +55,10 @@ public class GameRoom
 	}
 	void playerJoined(Player player)
 	{
+		for(int i = 0; i < players.size(); i++)
+		{
+			players.get(i).send("PlayerJoinedGame|"+player.publicSessionId+"|"+player.name);
+		}
 		players.add(player);
 	}
 	boolean isPlayerInGame(Player p)

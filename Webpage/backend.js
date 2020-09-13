@@ -34,12 +34,16 @@ class BackendConnection {
 		}
 		if(params[0]=="GameId")
 		{
-			var gameId = params[1]
-			sendToGame(gameId)
+			var gameId = params[1];
+			sendToGame(gameId);
 		}
 		if(params[0]=="UpdatedName")
 		{
 			changePlayerNameLobby(params[1], params[2]);
+		}
+		if(params[0]=="PlayerJoinedGame")
+		{
+			addPlayerToLobby(params[1], params[2]);
 		}
 	}
 
