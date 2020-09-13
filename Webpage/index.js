@@ -2,8 +2,6 @@
 var cookies = new CookieMonster()
 var connection = new BackendConnection("Matthew")
 
-var connected = false;
-
 const States = {
 	MAIN_MENU: "InMainMenu",
 	LOBBY: "InLobby",
@@ -11,12 +9,8 @@ const States = {
 };
 
 function setState(state) {
-	if(!connected)
-	{
-		connected = true;
-		$('#connecting-screen').find("h2").text("Connected.");
-		$('#connecting-screen').fadeTo(100, 0, function() { $('#connecting-screen').hide(); $('#error-screen').hide()});
-	}
+	$('#connecting-screen').find("h2").text("Connected.");
+	$('#connecting-screen').fadeTo(100, 0, function() { $('#connecting-screen').hide(); $('#error-screen').hide()});
 	$('#lobby-screen').fadeTo(100, 0)
 	$('#game-screen').fadeTo(100, 0)
 	$('#main-menu-screen').fadeTo(100, 0, function() { setStateFinal(state) })
@@ -92,7 +86,7 @@ $(document).ready(function(){
 	  	$("#join-game-button").prop("disabled", "disabled");
 	});
 	setTimeout(function(){
-		if(!connectionError)
+		if(!connection.connectionError)
 		{
 			$("#connecting-screen").addClass('connecting')
 			$("#connecting-screen").removeClass('screen')

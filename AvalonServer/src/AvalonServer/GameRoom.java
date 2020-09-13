@@ -2,6 +2,7 @@ package AvalonServer;
 
 import java.security.SecureRandom;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 public class GameRoom 
@@ -10,12 +11,21 @@ public class GameRoom
 	{
 		InLobby, InGame
 	}
+	static enum Role
+	{
+		GoodGuy, BadGuy, Merlin, Percival, Morgana, Oberon, Assassin
+	}
 	LinkedList<Player> players = new LinkedList<Player>();
 	String id;
 	State s;
 	Date created;
+	HashMap<Role, Integer> roles = new HashMap<Role, Integer>();
 	public GameRoom()
 	{
+		for(Role r : Role.values())
+		{
+			roles.put(r, 0);
+		}
 		id = generateId();
 		created = new Date();
 	}
@@ -83,9 +93,27 @@ public class GameRoom
 			i++;
 		}
 	}
+	void startGame()
+	{
+		
+	}
+	void nameUpdated(Player thePlayer)
+	{
+		for(int i = 0; i < players.size(); i++)
+		{
+			if(players.get(i).equals(thePlayer))
+			{
+				players.get(i).send("UpdatedName|"+thePlayer.publicSessionId+"|"+thePlayer.name);
+			}
+		}
+	}
 	static Role removeRandomly(LinkedList<Role> roles)
 	{
 		int index = (int) (Math.random()*roles.size());
 		return roles.remove(index);
+	}
+	@Override
+	public String toString() {
+		return "Game("+id+")";
 	}
 }

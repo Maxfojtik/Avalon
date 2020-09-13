@@ -1,8 +1,8 @@
 
 var wsUri = "ws://localhost:12389";
-var connectionError = false;
 class BackendConnection {
 	constructor(sessionId) {
+		this.connectionError = false;
 		this.sesid = sessionId;
 		this.websocket = new WebSocket(wsUri);
 		var self = this;
@@ -36,11 +36,15 @@ class BackendConnection {
 		{
 			
 		}
+		if(params[0]=="UpdatedName")
+		{
+			changePlayerNameLobby(params[1], params[2]);
+		}
 	}
 
 	onError(evt) {
 		console.log('ERROR: ' + evt.type);
-		connectionError = true;
+		this.connectionError = true;
 		$("#connecting-screen").hide();
 		$("#error-screen").addClass('connecting');
 		$("#error-screen").removeClass('screen');
@@ -59,6 +63,16 @@ class BackendConnection {
 	sendCreateGame()
 	{
 		this.send("CreateGame");
+	}
+	
+	sendUpdateName(sessionId, newName)
+	{
+		this.send("UpdateName|"+sessionId+"|"+newName);
+	}
+	
+	setRoleCount(sessionId, gameId, roleName, number)
+	{
+		this.send("Admin|"+sessionId+"|"+gameId+"|SetRole|"+roleName+"|"+number);
 	}
 	
 	checkLobbyOpen(gameId)

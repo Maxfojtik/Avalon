@@ -6,6 +6,8 @@ import org.java_websocket.WebSocket;
 import org.java_websocket.handshake.ClientHandshake;
 import org.java_websocket.server.WebSocketServer;
 
+import AvalonServer.GameRoom.Role;
+
 class Websockets extends WebSocketServer {
 	public Websockets() {
 		super(new InetSocketAddress(12389));
@@ -89,6 +91,11 @@ class Websockets extends WebSocketServer {
 				conn.send("LobbyOpen|"+false);
 			}
 		}
+		if(params[0].equals("UpdateName"))//Admin|playerSessionId|Gameid|Action|parameters
+		{
+			Player thePlayer = AvalonServer.getPlayerById(params[1]);
+			thePlayer.setName(params[2]);
+		}
 		if(params[0].equals("Admin"))//Admin|playerSessionId|Gameid|Action|parameters
 		{
 			GameRoom theRoom = GameRoom.getById(params[2]);
@@ -110,14 +117,23 @@ class Websockets extends WebSocketServer {
 					if(action.equals("Promote"))
 					{
 						Player targetPlayer = AvalonServer.getPlayerById(params[4]);
+						System.out.println(thePlayer+" promoted "+targetPlayer);
 						if(theRoom.isPlayerInGame(targetPlayer))
 						{
 							theRoom.promote(targetPlayer);
 						}
 					}
-					if(action.equals("SetRoles"))
+					if(action.equals("SetRole"))
 					{
-						
+						String role = params[4];
+						String amount = params[5];
+						System.out.println(thePlayer+" set "+role+" to "+amount);
+						theRoom.roles.put(Role.valueOf(role), Integer.parseInt(amount));
+					}
+					if(action.equals("Start"))
+					{
+						System.out.println(thePlayer+" started "+theRoom);
+						theRoom.startGame();
 					}
 				}
 			}

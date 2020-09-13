@@ -1,13 +1,19 @@
 package AvalonServer;
 
+import java.util.UUID;
+
 import org.java_websocket.WebSocket;
+
+import AvalonServer.GameRoom.Role;
 
 public class Player 
 {
 	String sessionID;
+	String publicSessionId;
 	String name;
 	WebSocket socket;
 	Role myRole;
+	GameRoom myRoom;
 	static enum State
 	{
 		Disconnected, InMainMenu, InLobby, InGame
@@ -18,6 +24,7 @@ public class Player
 		sessionID = sess;
 		socket = sock;
 		s = State.InMainMenu;
+		publicSessionId = UUID.randomUUID().toString();
 	}
 	@Override
 	public boolean equals(Object p) 
@@ -33,5 +40,10 @@ public class Player
 	public String toString() {
 		// TODO Auto-generated method stub
 		return name+"("+sessionID+")";
+	}
+	void setName(String n)
+	{
+		name = n;
+		myRoom.nameUpdated(this);
 	}
 }
