@@ -14,6 +14,7 @@ public class Player
 	WebSocket socket;
 	Role myRole;
 	GameRoom myRoom;
+	long disconnectTime = -1;
 	static enum State
 	{
 		Disconnected, InMainMenu, InLobby, InGame

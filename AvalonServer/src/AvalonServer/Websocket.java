@@ -23,6 +23,7 @@ class Websockets extends WebSocketServer {
 		System.out.println(conn.getRemoteSocketAddress().getAddress().getHostAddress() + " disconnected");
 		Player dcedPlayer = AvalonServer.getPlayerByWebsocket(conn);
 		dcedPlayer.socket = null;
+		dcedPlayer.disconnectTime = System.currentTimeMillis();
 //		AvalonServer.playerDisconnected(dcedPlayer);
 	}
 
