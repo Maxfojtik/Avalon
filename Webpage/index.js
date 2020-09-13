@@ -50,8 +50,7 @@ function createGame() {
 }
 // Called when connecting to game lobby. Called by backend
 function setGameId(gameId) {
-	console.log("Sending to lobby")
-	setState(States.LOBBY)
+	
 }
 
 // To be called after validating text string in on input for game lobby join text input
