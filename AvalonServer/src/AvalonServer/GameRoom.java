@@ -1,15 +1,23 @@
 package AvalonServer;
 
 import java.security.SecureRandom;
+import java.util.Date;
 import java.util.LinkedList;
 
 public class GameRoom 
 {
+	static enum State
+	{
+		InLobby, InGame
+	}
 	LinkedList<Player> players = new LinkedList<Player>();
 	String id;
+	State s;
+	Date created;
 	public GameRoom()
 	{
 		id = generateId();
+		created = new Date();
 	}
 	static final String AB = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	static SecureRandom rnd = new SecureRandom();
@@ -46,5 +54,38 @@ public class GameRoom
 	void removePlayer(Player p)
 	{
 		players.remove(p);
+		p.send("Removed");
+	}
+	boolean isLobbyOpen()
+	{
+		return s == State.InLobby;
+	}
+	Player getHost()
+	{
+		return players.get(0);
+	}
+	boolean isHost(Player p)
+	{
+		return getHost().equals(p);
+	}
+	void promote(Player p)
+	{
+		players.remove(p);
+		players.addFirst(p);
+	}
+	void assignRoles(LinkedList<Role> roles)
+	{
+		assert roles.size() == players.size();
+		int i = 0;
+		while(roles.size()>0)
+		{
+			players.get(i).myRole = removeRandomly(roles);
+			i++;
+		}
+	}
+	static Role removeRandomly(LinkedList<Role> roles)
+	{
+		int index = (int) (Math.random()*roles.size());
+		return roles.remove(index);
 	}
 }
