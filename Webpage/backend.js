@@ -35,6 +35,7 @@ class BackendConnection {
 		if(params[0]=="GameId")
 		{
 			setGameId(params[1]);
+			this.sendJoinGame(cookies.sessionId, params[1]);
 		}
 		if(params[0]=="UpdatedName")
 		{
