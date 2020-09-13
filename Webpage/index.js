@@ -67,7 +67,6 @@ function clearLobby() {
 	$("lobby-player-list").empty();
 }
 function populateLobby() {
-	// addPlayerToLobby(cookies.sessionId, cookies.getPlayerName());
 	$("#input-name-lobby").val(cookies.getPlayerName())
 	// Set lobby ID at top
 	// Set link at top
@@ -77,7 +76,6 @@ function addPlayersToExistingLobby(players) { // Players comes in format: [id1, 
 	for (var i=0; i<players.length; i+=2) {
 		addPlayerToLobby(players[i], players[i+1])
 	}
-	// $('#lobby-player-list').append($('#lobby-player-list').first().remove())
 }
 function addPlayerToLobby(sessionId, name) {
 	var newPlayerCard = document.createElement('div');
