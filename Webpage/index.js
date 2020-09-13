@@ -49,7 +49,7 @@ function createGame() {
 	connection.sendCreateGame();
 }
 // Called when connecting to game lobby. Called by backend
-function sendToGame(gameId) {
+function setGameId(gameId) {
 	console.log("Sending to lobby")
 	setState(States.LOBBY)
 }
@@ -69,9 +69,10 @@ function clearLobby() {
 }
 function populateLobby() {
 	addPlayerToLobby(cookies.sessionId, cookies.getPlayerName());
-	$("#input-name-lobby")
+	$("#input-name-lobby").val(cookies.getPlayerName())
 	// Set lobby ID at top
 	// Set link at top
+	$("#input-name-lobby").focus()
 }
 function addPlayerToLobby(sessionId, name) {
 	var newPlayerCard = document.createElement('div');
