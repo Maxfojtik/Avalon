@@ -41,6 +41,10 @@ public class Player
 		// TODO Auto-generated method stub
 		return name+"("+sessionID+")";
 	}
+	void setRoom(GameRoom gr)
+	{
+		myRoom = gr;
+	}
 	void setName(String n)
 	{
 		name = n;

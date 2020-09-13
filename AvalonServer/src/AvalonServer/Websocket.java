@@ -48,6 +48,7 @@ class Websockets extends WebSocketServer {
 				{
 					room.playerJoined(thatPlayer);
 					thatPlayer.s = Player.State.InLobby;
+					thatPlayer.setRoom(room);
 					conn.send("UpdateState|"+thatPlayer.s.toString());
 				}
 			}

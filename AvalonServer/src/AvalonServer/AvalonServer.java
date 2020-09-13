@@ -18,7 +18,7 @@ public class AvalonServer
 	{
 		for(int i = 0; i < allPlayers.size(); i++)
 		{
-			if(allPlayers.get(i).sessionID.equals(id))
+			if(allPlayers.get(i).sessionID.equals(id) || allPlayers.get(i).publicSessionId.equals(id))
 			{
 				return allPlayers.get(i);
 			}
