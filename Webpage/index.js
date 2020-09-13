@@ -77,21 +77,21 @@ function populateLobby() {
 	// Set lobby ID at top
 	// Set link at top
 }
-function addPlayerToLobby(session_id, name) {
-	var new_player_card = document.createElement('div');
-	new_player_card.setAttribute('class', 'player-card');
-	new_player_card.setAttribute('data-session-id', session_id);
-	new_player_card.innerHTML = `
+function addPlayerToLobby(sessionId, name) {
+	var newPlayerCard = document.createElement('div');
+	newPlayerCard.setAttribute('class', 'player-card');
+	newPlayerCard.setAttribute('data-session-id', session_id);
+	newPlayerCard.innerHTML = `
 		<span>${name}</span>
 		<img src="Images/kick.png" alt="Kick" class="icon">
 		<img src="Images/crown.png" alt="Leader" class="icon">
 	`;
-	$('#lobby-player-list').append(new_player_card);
+	$('#lobby-player-list').append(newPlayerCard);
 }
 // Changes the display for the player's name
-function changePlayerNameLobby(session_id, new_name) {
-	var player_card = $(`.player-card[data-session-id=${session_id}`);
-	player_card.first().text(new_name)
+function changePlayerNameLobby(sessionId, newName) {
+	var playerCard = $(`.player-card[data-session-id=${sessionId}`);
+	playerCard.first().text(newName)
 }
 
 $(document).ready(function(){
