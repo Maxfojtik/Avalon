@@ -48,6 +48,7 @@ function joinGame() {
 function createGame() {
 	connection.sendCreateGame();
 }
+// Called when connecting to game lobby. Called by backend
 function sendToGame(gameId) {
 	console.log("Sending to lobby")
 	setState(States.LOBBY)
@@ -68,6 +69,7 @@ function clearLobby() {
 }
 function populateLobby() {
 	addPlayerToLobby(cookies.sessionId, cookies.getPlayerName());
+	$("#input-name-lobby")
 	// Set lobby ID at top
 	// Set link at top
 }
@@ -84,7 +86,7 @@ function addPlayerToLobby(sessionId, name) {
 }
 // Changes the display for the player's name
 function changePlayerNameLobby(sessionId, newName) {
-	var playerCard = $(`.player-card[data-session-id=${sessionId}`);
+	var playerCard = $(".player-card[data-session-id="+sessionId+"]");
 	playerCard.first().text(newName)
 }
 
@@ -102,6 +104,8 @@ $(document).ready(function(){
 	$('#input-name-lobby').on('input', function() {
 		var name = $('#input-name-lobby').val()
 		changePlayerNameLobby(cookies.sessionId, name);
+		connection.sendUpdateName(localStorage.sessionId, name)
+		cookies.setPlayerName(name)
 	});
 
 	setTimeout(function(){
