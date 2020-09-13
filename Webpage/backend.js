@@ -50,6 +50,10 @@ class BackendConnection {
 		{
 			addPlayerToLobby(params[1], params[2]);
 		}
+		if(params[0]=="PlayerLeftGame")
+		{
+			removePlayerCardLobby(params[1]);
+		}
 		if(params[0]=="Players")
 		{
 			addPlayersToExistingLobby(params.splice(1));

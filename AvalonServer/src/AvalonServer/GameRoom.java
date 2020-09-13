@@ -74,6 +74,10 @@ public class GameRoom
 	void removePlayer(Player p)
 	{
 		players.remove(p);
+		for(int i = 0; i < players.size(); i++)
+		{
+			players.get(i).send("PlayerLeftGame|"+p.publicSessionId);
+		}
 	}
 	boolean isLobbyOpen()
 	{
