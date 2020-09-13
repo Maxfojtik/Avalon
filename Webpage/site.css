@@ -130,7 +130,12 @@ body {
   float: right;
   padding-right: 10px;
 }
-
+.kick-icon-hidden {
+  display: none;
+}
+.host-icon-hidden {
+  display: none;
+}
 
 .key {
     border: 2px solid #202020;
