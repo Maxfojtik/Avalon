@@ -50,7 +50,7 @@ class Websockets extends WebSocketServer {
 					thatPlayer.s = Player.State.InLobby;
 					thatPlayer.setRoom(room);
 					conn.send("UpdateState|"+thatPlayer.s.toString());
-					conn.send("Players|"+room.generatePlayers(thatPlayer));
+					conn.send("Players"+room.generatePlayers(thatPlayer));
 				}
 			}
 		}
@@ -66,6 +66,10 @@ class Websockets extends WebSocketServer {
 			else
 			{
 				Player newPlayer = new Player(sessionId, conn);
+				if(params.length>1)
+				{
+					newPlayer.name = params[2];
+				}
 				AvalonServer.allPlayers.add(newPlayer);
 				conn.send("UpdateState|"+newPlayer.s.toString());
 			}

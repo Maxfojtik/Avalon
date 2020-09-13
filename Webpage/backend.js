@@ -3,9 +3,8 @@
 var wsUri = "ws://74.140.3.27:12389"; // Max's
 
 class BackendConnection {
-	constructor(sessionId) {
+	constructor() {
 		this.connectionError = false;
-		this.sesid = sessionId;
 		this.websocket = new WebSocket(wsUri);
 		var self = this;
 		this.websocket.onopen = function(evt) { self.onOpen(evt) };
@@ -16,7 +15,7 @@ class BackendConnection {
 
 	onOpen(evt) {
 		console.log("CONNECTED");
-		this.send("PlayerConnect|"+this.sesid);
+		this.send("PlayerConnect|"+cookies.sessionId+"|"+cookies.name);
 	}
 
 	onClose(evt) {

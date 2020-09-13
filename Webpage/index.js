@@ -1,6 +1,6 @@
 
 var cookies = new CookieMonster()
-var connection = new BackendConnection(cookies.sessionId)
+var connection = new BackendConnection()
 
 const States = {
 	MAIN_MENU: "InMainMenu",
