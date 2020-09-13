@@ -80,7 +80,7 @@ function populateLobby() {
 function addPlayerToLobby(sessionId, name) {
 	var newPlayerCard = document.createElement('div');
 	newPlayerCard.setAttribute('class', 'player-card');
-	newPlayerCard.setAttribute('data-session-id', session_id);
+	newPlayerCard.setAttribute('data-session-id', sessionId);
 	newPlayerCard.innerHTML = `
 		<span>${name}</span>
 		<img src="Images/kick.png" alt="Kick" class="icon">
