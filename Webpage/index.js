@@ -44,13 +44,13 @@ function joinGame() {
 	connection.sendJoinGame(cookies.sessionId, gameId);
 	console.log("Joining game")
 }
-// Asks server for a room code. Connection will then call sendToGame
+// Asks server for a room code and then server will have us join game
 function createGame() {
 	connection.sendCreateGame();
 }
 // Called when connecting to game lobby. Called by backend
 function setGameId(gameId) {
-	
+	$("#lobby-id").val(gameId.toString())
 }
 
 // To be called after validating text string in on input for game lobby join text input
