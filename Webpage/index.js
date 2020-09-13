@@ -1,3 +1,5 @@
+
+var cookies = new CookieMonster()
 var connection = new BackendConnection("Matthew")
 
 var connected = false;
@@ -63,11 +65,20 @@ function postCheckedLobbyOpen(isOpen) {
   }
 }
 
-function addPlayerToLobby() {
-
+function addPlayerToLobby(session_id, name) {
+	var new_player_card = document.createElement('div');
+	new_player_card.setAttribute('class', 'player-card');
+	new_player_card.setAttribute('data-session-id', session_id);
+	new_player_card.innerHTML = `
+		<span>${name}</span>
+		<img src="Images/kick.png" alt="Kick" class="icon">
+		<img src="Images/crown.png" alt="Leader" class="icon">
+	`;
+	$('#lobby-player-list').append(new_player_card);
 }
-function changePlayerNameLobby() {
-
+function changePlayerNameLobby(session_id, new_name) {
+	var player_card = $(`.player-card[data-session-id=${session_id}`);
+	player_card.first().text(new_name)
 }
 
 $(document).ready(function(){

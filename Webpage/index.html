@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="cookiemonster.js"></script>
 		<script src="backend.js"></script>
 		<script src="helpers.js"></script>
 		<script src="index.js"></script>
@@ -18,10 +19,10 @@
 		</div>
 		<div id="error-screen" class="screen">
 			<h2>Connection Error</h2>
-			<p>There as an error connecting to the server</p>
+			<p>There was an error connecting to the server</p>
 			<p>you should probably refresh or give up</p>
 		</div>
-		<div id="main-menu-screen" class="screen">
+		<div id="main-menu-screen" class="screen force-invisible">
 			<h1 style="margin-top: 70px; margin-bottom: 70px;">Avalon</h1>
 
 			<div class="left-column">
@@ -42,16 +43,26 @@
 			<h1 id="lobby-id"></h1>
 			<p id="lobby-link">link</p>
 			<label>Your Name:</label><br>
-			<input type="text" class="fancy-input" maxlength="30">
+			<input type="text" class="fancy-input" id="input-name-lobby" maxlength="20">
 
-			<div class="left-column" id="lobby-player-list">
-				<div class="player-lobby">
-					Max
+			<div class="left-column">
+				<h2>Players:</h2>
+				<div id="lobby-player-list">
+					<div class="player-card">
+						<span>01234567890123456789</span>
+						<img src="Images/kick.png" alt="Kick" class="icon">
+						<img src="Images/crown.png" alt="Leader" class="icon">
+					</div>
+					<div class="player-card" data-name="" data-session-id="">
+						<span>01234567890123456789</span>
+						<img src="Images/kick.png" alt="Kick" class="icon">
+						<img src="Images/crown.png" alt="Leader" class="icon">
+					</div>
 				</div>
 			</div>
 
 			<div class="right-column">
-			
+				<h2>Roles:</h2>
 			</div>
 		</div>
 

@@ -6,6 +6,7 @@
 }
 .force-visible {
   display: block !important;
+  opacity: 1 !important;
 }
 
 /* General */
@@ -90,6 +91,7 @@ body {
   text-transform: uppercase;
 }
 
+
 .fancy-input {
   background-color: #202020;
   color: #f0f0f0;
@@ -105,10 +107,32 @@ body {
   text-align: center;
 }
 
-.player-lobby {
-  border: 2px solid black;
+#input-name-lobby {
+  margin-right: auto;
+  margin-left: auto;
+  display: block;
+  margin-bottom: 20px
 }
 
+.player-card {
+  border: 2px solid #1a1a1a;
+  font-size: 30px;
+  border-radius: 6px;
+  padding-left: 16px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  width: 70%;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 3px;
+  text-align: left;
+}
+
+.icon {
+  max-height: 30px;
+  float: right;
+  padding-right: 10px;
+}
 
 
 .key {
