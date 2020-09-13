@@ -95,6 +95,9 @@ function changePlayerNameLobby(sessionId, newName) {
 	var playerCard = $(".player-card[data-session-id="+sessionId+"]");
 	playerCard.first().text(newName)
 }
+function removePlayerCardLobby(sessionId) {
+	$(".player-card[data-session-id="+sessionId+"]").remove()
+}
 
 $(document).ready(function(){
 	// Checks if the room code is valid via string checking and polling server. Enables join button only when valid
