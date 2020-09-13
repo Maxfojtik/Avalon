@@ -66,10 +66,14 @@ public class GameRoom
 	{
 		return players.contains(p);
 	}
+	void kickPlayer(Player p)
+	{
+		removePlayer(p);
+		p.send("Removed");
+	}
 	void removePlayer(Player p)
 	{
 		players.remove(p);
-		p.send("Removed");
 	}
 	boolean isLobbyOpen()
 	{

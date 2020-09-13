@@ -22,7 +22,8 @@ class Websockets extends WebSocketServer {
 	public void onClose(WebSocket conn, int code, String reason, boolean remote) {
 		System.out.println(conn.getRemoteSocketAddress().getAddress().getHostAddress() + " disconnected");
 		Player dcedPlayer = AvalonServer.getPlayerByWebsocket(conn);
-		AvalonServer.playerDisconnected(dcedPlayer);
+		dcedPlayer.socket = null;
+//		AvalonServer.playerDisconnected(dcedPlayer);
 	}
 
 	@Override
@@ -35,7 +36,7 @@ class Websockets extends WebSocketServer {
 			System.out.println("Creating a game");
 			GameRoom room = new GameRoom();
 			AvalonServer.gameRooms.add(room);
-			conn.send("GameId|"+room.id);
+			conn.send("RedirectToGame|"+room.id);
 		}
 		if(params[0].equals("JoinGame"))
 		{
@@ -61,7 +62,13 @@ class Websockets extends WebSocketServer {
 			Player thatPlayer = AvalonServer.getPlayerById(sessionId);
 			if(thatPlayer!=null)
 			{
+				thatPlayer.setSocket(conn);
 				conn.send("UpdateState|"+thatPlayer.s.toString());
+				if(thatPlayer.myRoom!=null)
+				{
+					conn.send("Players"+thatPlayer.myRoom.generatePlayers(thatPlayer));
+					conn.send("GameId|"+thatPlayer.myRoom.id);
+				}
 			}
 			else
 			{
