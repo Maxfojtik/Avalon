@@ -50,7 +50,9 @@ function createGame() {
 }
 // Called when connecting to game lobby. Called by backend
 function setGameId(gameId) {
-	$("#lobby-id").val(gameId.toString())
+	window.history.replaceState(null, null, "?room="+gameId);
+	$("#lobby-id").text(gameId)
+	$("#lobby-link").text(window.location)
 }
 
 // To be called after validating text string in on input for game lobby join text input

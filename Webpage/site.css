@@ -97,6 +97,12 @@ body {
   text-align: center;
 }
 
+#lobby-id {
+  font-size: 50px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
 #input-name-lobby {
   margin-right: auto;
   margin-left: auto;
