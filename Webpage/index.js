@@ -41,7 +41,7 @@ function setStateFinal(state) {
 // Joins a game from the start page. Will need to find the room code
 function joinGame() {
 	gameId = $("#input-game-code").val().toUpperCase()
-	connection.sendJoinGame(sessionId, gameId);
+	connection.sendJoinGame(cookies.sessionId, gameId);
 	console.log("Joining game")
 }
 // Asks server for a room code. Connection will then call sendToGame
@@ -67,11 +67,17 @@ function clearLobby() {
 	$("lobby-player-list").empty();
 }
 function populateLobby() {
-	addPlayerToLobby(cookies.sessionId, cookies.getPlayerName());
+	// addPlayerToLobby(cookies.sessionId, cookies.getPlayerName());
 	$("#input-name-lobby").val(cookies.getPlayerName())
 	// Set lobby ID at top
 	// Set link at top
 	$("#input-name-lobby").focus()
+}
+function addPlayersToExistingLobby(players) { // Players comes in format: [id1, name1, id2, name2...]
+	for (var i=0; i<players.length; i+=2) {
+		addPlayerToLobby(players[i], players[i+1])
+	}
+	// $('#lobby-player-list').append($('#lobby-player-list').first().remove())
 }
 function addPlayerToLobby(sessionId, name) {
 	var newPlayerCard = document.createElement('div');
