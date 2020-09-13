@@ -100,7 +100,7 @@ class Websockets extends WebSocketServer {
 		if(params[0].equals("UpdateName"))//Admin|playerSessionId|Gameid|Action|parameters
 		{
 			Player thePlayer = AvalonServer.getPlayerById(params[1]);
-			if(params.length>1)
+			if(params.length>2)
 			{
 				thePlayer.setName(params[2]);
 			}
