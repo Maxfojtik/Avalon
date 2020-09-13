@@ -45,6 +45,10 @@ class BackendConnection {
 		{
 			addPlayerToLobby(params[1], params[2]);
 		}
+		if(params[0]=="Players")
+		{
+			addPlayersToExistingLobby(params.splice(1));
+		}
 	}
 
 	onError(evt) {

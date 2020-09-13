@@ -28,6 +28,7 @@ public class GameRoom
 		}
 		id = generateId();
 		created = new Date();
+		s = State.InLobby;
 	}
 	static final String AB = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	static SecureRandom rnd = new SecureRandom();
@@ -105,11 +106,33 @@ public class GameRoom
 	{
 		for(int i = 0; i < players.size(); i++)
 		{
-			if(players.get(i).equals(thePlayer))
+			if(!players.get(i).equals(thePlayer))
 			{
 				players.get(i).send("UpdatedName|"+thePlayer.publicSessionId+"|"+thePlayer.name);
 			}
 		}
+	}
+	String generatePlayers(Player myself)
+	{
+		StringBuilder builder = new StringBuilder();
+		for(Player player : players)
+		{
+			if(player.equals(myself))
+			{
+				builder.append("|");
+				builder.append(player.sessionID);
+				builder.append("|");
+				builder.append(player.name);
+			}
+			else
+			{
+				builder.append("|");
+				builder.append(player.publicSessionId);
+				builder.append("|");
+				builder.append(player.name);
+			}
+		}
+		return builder.toString();
 	}
 	static Role removeRandomly(LinkedList<Role> roles)
 	{

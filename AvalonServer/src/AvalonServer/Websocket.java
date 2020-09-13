@@ -50,6 +50,7 @@ class Websockets extends WebSocketServer {
 					thatPlayer.s = Player.State.InLobby;
 					thatPlayer.setRoom(room);
 					conn.send("UpdateState|"+thatPlayer.s.toString());
+					conn.send("Players|"+room.generatePlayers(thatPlayer));
 				}
 			}
 		}
@@ -88,14 +89,21 @@ class Websockets extends WebSocketServer {
 			}
 			else
 			{
-				System.out.println("nope");
+				System.out.println("nope does not exist");
 				conn.send("LobbyOpen|"+false);
 			}
 		}
 		if(params[0].equals("UpdateName"))//Admin|playerSessionId|Gameid|Action|parameters
 		{
 			Player thePlayer = AvalonServer.getPlayerById(params[1]);
-			thePlayer.setName(params[2]);
+			if(params.length>1)
+			{
+				thePlayer.setName(params[2]);
+			}
+			else
+			{
+				thePlayer.setName("");
+			}
 		}
 		if(params[0].equals("Admin"))//Admin|playerSessionId|Gameid|Action|parameters
 		{
