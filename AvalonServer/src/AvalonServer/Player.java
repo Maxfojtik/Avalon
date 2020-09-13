@@ -50,4 +50,8 @@ public class Player
 		name = n;
 		myRoom.nameUpdated(this);
 	}
+	void setSocket(WebSocket soc)
+	{
+		socket = soc;
+	}
 }
