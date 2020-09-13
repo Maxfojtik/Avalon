@@ -1,6 +1,6 @@
 
 var cookies = new CookieMonster()
-var connection = new BackendConnection("Matthew")
+var connection = new BackendConnection(cookies.sessionId)
 
 const States = {
 	MAIN_MENU: "InMainMenu",
@@ -104,7 +104,7 @@ $(document).ready(function(){
 	$('#input-name-lobby').on('input', function() {
 		var name = $('#input-name-lobby').val()
 		changePlayerNameLobby(cookies.sessionId, name);
-		connection.sendUpdateName(localStorage.sessionId, name)
+		connection.sendUpdateName(cookies.sessionId, name)
 		cookies.setPlayerName(name)
 	});
 
