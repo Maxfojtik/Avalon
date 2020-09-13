@@ -53,6 +53,7 @@ class Websockets extends WebSocketServer {
 					thatPlayer.setRoom(room);
 					conn.send("UpdateState|"+thatPlayer.s.toString());
 					conn.send("Players"+room.generatePlayers(thatPlayer));
+					conn.send("GameId|"+room.id);
 				}
 			}
 		}
@@ -64,6 +65,7 @@ class Websockets extends WebSocketServer {
 			if(thatPlayer!=null)
 			{
 				thatPlayer.setSocket(conn);
+				thatPlayer.disconnectTime = -1;
 				conn.send("UpdateState|"+thatPlayer.s.toString());
 				if(thatPlayer.myRoom!=null)
 				{
