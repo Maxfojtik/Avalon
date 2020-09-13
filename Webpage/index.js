@@ -33,9 +33,8 @@ function setStateFinal(state) {
 			$('#main-menu-screen').hide();
 			$('#game-screen').hide();
 			$('#lobby-screen').fadeTo(300, 1)
-			// Clear lobby
-			// Set lobby ID at top
-			// Set link at top
+			clearLobby();
+			populateLobby();
 			break;
 		case States.GAME:
 			$('#main-menu-screen').hide();
@@ -51,10 +50,15 @@ function joinGame() {
 	connection.sendJoinGame(sessionId, gameId);
 	console.log("Joining game")
 }
-// Creates a game from the start page. Will need to ask server for a room code then go to that room
+// Asks server for a room code. Connection will then call sendToGame
 function createGame() {
-
+	connection.sendCreateGame();
 }
+function sendToGame(gameId) {
+	console.log("Sending to lobby")
+	setState(States.LOBBY)
+}
+
 // To be called after validating text string in on input for game lobby join text input
 function postCheckedLobbyOpen(isOpen) {
 	if (isOpen) {
@@ -65,6 +69,14 @@ function postCheckedLobbyOpen(isOpen) {
   }
 }
 
+function clearLobby() {
+	$("lobby-player-list").empty();
+}
+function populateLobby() {
+	addPlayerToLobby(cookies.sessionId, cookies.getPlayerName());
+	// Set lobby ID at top
+	// Set link at top
+}
 function addPlayerToLobby(session_id, name) {
 	var new_player_card = document.createElement('div');
 	new_player_card.setAttribute('class', 'player-card');
@@ -76,6 +88,7 @@ function addPlayerToLobby(session_id, name) {
 	`;
 	$('#lobby-player-list').append(new_player_card);
 }
+// Changes the display for the player's name
 function changePlayerNameLobby(session_id, new_name) {
 	var player_card = $(`.player-card[data-session-id=${session_id}`);
 	player_card.first().text(new_name)
@@ -91,6 +104,12 @@ $(document).ready(function(){
 	  else
 	  	$("#join-game-button").prop("disabled", "disabled");
 	});
+
+	$('#input-name-lobby').on('input', function() {
+		var name = $('#input-name-lobby').val()
+		changePlayerNameLobby(cookies.sessionId, name);
+	});
+
 	setTimeout(function(){
 		if(!connectionError)
 		{

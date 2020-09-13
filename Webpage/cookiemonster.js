@@ -16,6 +16,11 @@ class CookieMonster {
 	setPlayerName(name) {
 		localStorage.playerName = name;
 	}
-	getPlayerName() { return localStorage.playerName; }
+	getPlayerName() {
+		if (localStorage.playerName == undefined)
+			return ""
+		else
+			return localStorage.playerName; 
+	}
 
 }

@@ -34,7 +34,8 @@ class BackendConnection {
 		}
 		if(params[0]=="GameId")
 		{
-			
+			var gameId = params[1]
+			sendToGame(gameId)
 		}
 	}
 
