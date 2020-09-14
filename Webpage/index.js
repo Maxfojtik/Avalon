@@ -44,7 +44,7 @@ function setStateFinal(state) {
 // Joins a game from the start page. Will need to find the room code
 function joinGame() {
 	gameId = $("#input-game-code").val().toUpperCase()
-	connection.sendJoinGame(cookies.sessionId, gameId);
+	connection.sendJoinGame(gameId);
 	console.log("Joining game")
 }
 // Asks server for a room code and then server will have us join game
@@ -141,7 +141,7 @@ $(document).ready(function(){
 	$('#input-name-lobby').on('input', function() {
 		var name = $('#input-name-lobby').val()
 		changePlayerNameLobby(cookies.sessionId, name);
-		connection.sendUpdateName(cookies.sessionId, name)
+		connection.sendUpdateName(name)
 		cookies.setPlayerName(name)
 	});
 
