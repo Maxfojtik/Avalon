@@ -2,6 +2,9 @@
 var cookies = new CookieMonster()
 var connection = new BackendConnection()
 
+// Whether this client is the host
+var selfIsHost
+
 const States = {
 	MAIN_MENU: "InMainMenu",
 	LOBBY: "InLobby",
@@ -74,36 +77,43 @@ function populateLobby() {
 }
 // Changes the display for the player's name
 function changePlayerNameLobby(sessionId, newName) {
+	console.log(sessionId)
 	var playerCard = $(".player-card[data-session-id="+sessionId+"]");
 	playerCard.children().first().text(newName)
 }
 
-function remakePlayerCards(players) {
+function remakePlayerCards(players) { // [id1, name1, id2, name2, ...]
+	selfIsHost = players[0] == cookies.sessionId
 	$("#lobby-player-list").empty()
 	for (var i=0; i<players.length; i+=2) {
-		addPlayerToLobby(players[i], players[i+1], i==0)
+		addPlayerToLobby(players[i], players[i+1], i===0)
 	}
 }
 function addPlayerToLobby(sessionId, name, isHost) {
-	console.log("name: "+name)
 	var newPlayerCard = document.createElement('div');
 	newPlayerCard.setAttribute('class', 'player-card');
 	newPlayerCard.setAttribute('data-session-id', sessionId);
 
 	var playerName = document.createElement('span');
-	newPlayerCard.appendChild(document.createTextNode(name));
+	playerName.appendChild(document.createTextNode(name));
 	newPlayerCard.appendChild(playerName);
 
 	var kickIcon = document.createElement('img'); 
   kickIcon.src = "Images/kick.png";
   kickIcon.classList.add("icon")
-  kickIcon.classList.add("kick-icon-hidden");
+  if (!isHost && selfIsHost)
+  	kickIcon.classList.add("kick-icon-fade");
+  else
+	  kickIcon.classList.add("kick-icon-hidden");
 	newPlayerCard.appendChild(kickIcon);
 
   var hostIcon = document.createElement('img'); 
   hostIcon.src = "Images/crown.png";
   hostIcon.classList.add("icon")
-  hostIcon.classList.add("host-icon-hidden");
+  if (!isHost && selfIsHost)
+  	hostIcon.classList.add("host-icon-fade");
+  else
+	  hostIcon.classList.add("host-icon-hidden");
 	newPlayerCard.appendChild(hostIcon);
 
 	$('#lobby-player-list').append(newPlayerCard);
