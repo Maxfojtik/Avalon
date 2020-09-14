@@ -30,10 +30,11 @@ public class GameRoom
 		created = new Date();
 		s = State.InLobby;
 	}
-	static final String AB = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	static final String CONS = "BCDFGHJLMNPQRSTVWXYZ";
+	static final String VOWELS = "AEIOU";
 	static SecureRandom rnd = new SecureRandom();
 	
-	String randomString( int len ){
+	String randomString( int len, String AB){
 	   StringBuilder sb = new StringBuilder( len );
 	   for( int i = 0; i < len; i++ ) 
 	      sb.append( AB.charAt( rnd.nextInt(AB.length()) ) );
@@ -52,7 +53,19 @@ public class GameRoom
 	}
 	String generateId()
 	{
-		return randomString(4);
+		String potentialId = "";
+		while(potentialId.equals(""))
+		{
+			potentialId = randomString(1, CONS)+randomString(1, VOWELS)+randomString(1, CONS)+randomString(1, VOWELS);
+			for(GameRoom room : AvalonServer.gameRooms)
+			{
+				if(room.id.equals(potentialId))
+				{
+					potentialId = "";
+				}
+			}
+		}
+		return potentialId;
 	}
 	void playerJoined(Player player)
 	{
