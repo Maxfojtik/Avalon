@@ -56,7 +56,7 @@ class BackendConnection {
 		}
 		if(params[0]=="Players")
 		{
-			addPlayersToExistingLobby(params.splice(1));
+			remakePlayerCards(params.splice(1));
 		}
 	}
 

@@ -70,8 +70,6 @@ function clearLobby() {
 }
 function populateLobby() {
 	$("#input-name-lobby").val(cookies.getPlayerName())
-	// Set lobby ID at top
-	// Set link at top
 	$("#input-name-lobby").focus()
 }
 // Changes the display for the player's name
@@ -79,37 +77,9 @@ function changePlayerNameLobby(sessionId, newName) {
 	var playerCard = $(".player-card[data-session-id="+sessionId+"]");
 	playerCard.children().first().text(newName)
 }
-function removePlayerCardLobby(sessionId) {
-	$(".player-card[data-session-id="+sessionId+"]").remove()
-}
-function makeHost(sessionId) {
-	$(".player-card[data-session-id="+sessionId+"]").prependTo("#lobby-player-list")
-
-	// If we're the new host, give us host buttons
-	if (sessionId === cookies.sessionId) {
-	}
-	// If we're not the new host
-	else {
-		// Hide kick icons
-		kickIcons = $(".kick-icon")
-		kickIcons.removeClass("kick-icon")
-		kickIcons.addClass("kick-icon-hidden")
-		// Hide host icons
-		hostIcons = $(".host-icon")
-		hostIcons.removeClass("host-icon")
-		hostIcons.addClass("host-icon-hidden")
-		// Re-add host's host icon
-		hostIcon = $("#lobby-player-list").children().first().children(".host-icon-hidden")
-		hostIcon.removeClass("host-icon-hidden")
-		hostIcon.addClass("host-icon")
-	}
-}
 
 function remakePlayerCards(players) {
 	$("#lobby-player-list").empty()
-	addPlayersToExistingLobby(players);
-}
-function addPlayersToExistingLobby(players) { // Players comes in format: [id1, name1, id2, name2...]
 	for (var i=0; i<players.length; i+=2) {
 		addPlayerToLobby(players[i], players[i+1], i==0)
 	}
@@ -136,11 +106,6 @@ function addPlayerToLobby(sessionId, name, isHost) {
   hostIcon.classList.add("host-icon-hidden");
 	newPlayerCard.appendChild(hostIcon);
 
-	// newPlayerCard.innerHTML = `
-	// 	<span>${name}</span>
-	// 	<img src="Images/kick.png" alt="Kick" class="icon kick-icon-hidden">
-	// 	<img src="Images/crown.png" alt="Host" class="icon host-icon-hidden">
-	// `;
 	$('#lobby-player-list').append(newPlayerCard);
 }
 
