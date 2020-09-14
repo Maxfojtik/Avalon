@@ -58,6 +58,10 @@ class BackendConnection {
 		{
 			remakePlayerCards(params.splice(1));
 		}
+		if(params[0]=="Kicked")
+		{
+			getKicked();
+		}
 	}
 
 	onError(evt) {

@@ -134,7 +134,7 @@ class Websockets extends WebSocketServer {
 					System.out.println(thePlayer+" kicked "+targetPlayer);
 					if(thePlayer.myRoom.isPlayerInGame(targetPlayer))
 					{
-						thePlayer.myRoom.removePlayer(targetPlayer);
+						thePlayer.myRoom.kickPlayer(targetPlayer);
 					}
 				}
 				else if(action.equals("Promote"))

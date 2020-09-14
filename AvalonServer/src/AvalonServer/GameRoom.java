@@ -70,10 +70,12 @@ public class GameRoom
 	void kickPlayer(Player p)
 	{
 		removePlayer(p);
-		p.send("Removed");
+		p.send("Kicked");
 	}
 	void removePlayer(Player p)
 	{
+		p.s = Player.State.InMainMenu;
+		p.send("UpdateState|"+p.s.toString());
 		players.remove(p);
 		for(int i = 0; i < players.size(); i++)
 		{
@@ -97,6 +99,11 @@ public class GameRoom
 	{
 		players.remove(p);
 		players.addFirst(p);
+		for(int i = 0; i < players.size(); i++)
+		{
+			players.get(i).send("Players"+generatePlayers(players.get(i)));
+//			players.get(i).send("PlayerLeftGame|"+p.publicSessionId);
+		}
 	}
 	void assignRoles(LinkedList<Role> roles)
 	{
