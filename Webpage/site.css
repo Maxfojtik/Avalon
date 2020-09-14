@@ -56,6 +56,24 @@ body {
   cursor: default;
 }
 
+.leave-button {
+  background-color: #CC1922;
+  border: none;
+  color: white;
+  padding: 10px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 30px;
+  margin: 4px 2px;
+  margin-top: 30px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border: 2px solid #191919;
+  border-radius: 4px;
+  box-shadow: 0px 4px 4px rgb(18, 18, 18);
+}
+
 .player-select-radio {
     background-color: #303030;
     border: none;
@@ -123,6 +141,7 @@ body {
   margin-left: auto;
   margin-bottom: 3px;
   text-align: left;
+  height: 34px;
 }
 
 .icon {
@@ -145,30 +164,22 @@ body {
   cursor: pointer;
 }
 
-.key {
-    border: 2px solid #202020;
-    border-radius: 10px;
-    margin: 5px;
-    font-family: sans-serif, Arial;
-    font-size: 16px;
-    display: inline-block;
-    padding: 10px;
+.role-card {
+  border: 2px solid #1a1a1a;
+  font-size: 30px;
+  border-radius: 6px;
+  padding-left: 16px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  width: 70%;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 3px;
+  text-align: left;
 }
 
-#leave-button {
-    background-color: #0055aa;
-    border: none;
-    color: white;
-    padding: 10px 30px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 30px;
-    margin: 4px 2px;
-    margin-top: 30px;
-    transition-duration: 0.4s;
-    cursor: pointer;
-    border: 2px solid #191919;
-    border-radius: 4px;
-    box-shadow: 0px 4px 4px rgb(18, 18, 18);
+.bottom-right {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
 }
