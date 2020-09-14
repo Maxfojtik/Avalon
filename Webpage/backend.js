@@ -60,7 +60,7 @@ class BackendConnection {
 		}
 		if(params[0]=="Kicked")
 		{
-			getKicked();
+			//getKicked();
 		}
 	}
 
