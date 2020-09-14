@@ -115,7 +115,7 @@ function addPlayerToLobby(sessionId, name, isHost) {
   	hostIcon.classList.add("icon-fade");
   else if (!isHost)
 	  hostIcon.classList.add("icon-hidden");
-	kickIcon.onclick = function() { connection.sendPromote(sessionId) };
+	hostIcon.onclick = function() { connection.sendPromote(sessionId) };
 	newPlayerCard.appendChild(hostIcon);
 
 	$('#lobby-player-list').append(newPlayerCard);
