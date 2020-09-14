@@ -105,7 +105,7 @@ function addPlayerToLobby(sessionId, name, isHost) {
   	kickIcon.classList.add("icon-fade");
   else
 	  kickIcon.classList.add("icon-hidden");
-	kickIcon.onclick = function() {  };
+	kickIcon.onclick = function() { connection.sendKick(sessionId) };
 	newPlayerCard.appendChild(kickIcon);
 
   var hostIcon = document.createElement('img'); 
@@ -115,7 +115,7 @@ function addPlayerToLobby(sessionId, name, isHost) {
   	hostIcon.classList.add("icon-fade");
   else if (!isHost)
 	  hostIcon.classList.add("icon-hidden");
-	kickIcon.onclick = function() {  };
+	kickIcon.onclick = function() { connection.sendPromote(sessionId) };
 	newPlayerCard.appendChild(hostIcon);
 
 	$('#lobby-player-list').append(newPlayerCard);
