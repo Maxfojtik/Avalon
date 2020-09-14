@@ -122,45 +122,41 @@ class Websockets extends WebSocketServer {
 				thePlayer.setName("");
 			}
 		}
-		else if(params[0].equals("Admin"))//Admin|playerSessionId|Gameid|Action|parameters
+		else if(params[0].equals("Admin"))//Admin|playerSessionId|Action|parameters
 		{
-			GameRoom theRoom = GameRoom.getById(params[2]);
-			if(theRoom!=null)
+			Player thePlayer = AvalonServer.getPlayerById(params[1]);
+			if(thePlayer!=null && thePlayer.myRoom.isHost(thePlayer))
 			{
-				Player thePlayer = AvalonServer.getPlayerById(params[1]);
-				if(thePlayer!=null && theRoom.isHost(thePlayer))
+				String action = params[2];
+				if(action.equals("Kick"))
 				{
-					String action = params[3];
-					if(action.equals("Kick"))
+					Player targetPlayer = AvalonServer.getPlayerById(params[3]);
+					System.out.println(thePlayer+" kicked "+targetPlayer);
+					if(thePlayer.myRoom.isPlayerInGame(targetPlayer))
 					{
-						Player targetPlayer = AvalonServer.getPlayerById(params[4]);
-						System.out.println(thePlayer+" kicked "+targetPlayer);
-						if(theRoom.isPlayerInGame(targetPlayer))
-						{
-							theRoom.removePlayer(targetPlayer);
-						}
+						thePlayer.myRoom.removePlayer(targetPlayer);
 					}
-					else if(action.equals("Promote"))
+				}
+				else if(action.equals("Promote"))
+				{
+					Player targetPlayer = AvalonServer.getPlayerById(params[3]);
+					System.out.println(thePlayer+" promoted "+targetPlayer);
+					if(thePlayer.myRoom.isPlayerInGame(targetPlayer))
 					{
-						Player targetPlayer = AvalonServer.getPlayerById(params[4]);
-						System.out.println(thePlayer+" promoted "+targetPlayer);
-						if(theRoom.isPlayerInGame(targetPlayer))
-						{
-							theRoom.promote(targetPlayer);
-						}
+						thePlayer.myRoom.promote(targetPlayer);
 					}
-					else if(action.equals("SetRole"))
-					{
-						String role = params[4];
-						String amount = params[5];
-						System.out.println(thePlayer+" set "+role+" to "+amount);
-						theRoom.roles.put(Role.valueOf(role), Integer.parseInt(amount));
-					}
-					else if(action.equals("Start"))
-					{
-						System.out.println(thePlayer+" started "+theRoom);
-						theRoom.startGame();
-					}
+				}
+				else if(action.equals("SetRole"))
+				{
+					String role = params[3];
+					String amount = params[4];
+					System.out.println(thePlayer+" set "+role+" to "+amount);
+					thePlayer.myRoom.roles.put(Role.valueOf(role), Integer.parseInt(amount));
+				}
+				else if(action.equals("Start"))
+				{
+					System.out.println(thePlayer+" started "+thePlayer.myRoom);
+					thePlayer.myRoom.startGame();
 				}
 			}
 		}
