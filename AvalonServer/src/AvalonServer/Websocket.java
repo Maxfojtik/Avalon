@@ -122,6 +122,11 @@ class Websockets extends WebSocketServer {
 				thePlayer.setName("");
 			}
 		}
+		else if(params[0].equals("LeaveGame"))
+		{
+			Player thePlayer = AvalonServer.getPlayerById(params[1]);
+			thePlayer.myRoom.removePlayer(thePlayer);
+		}
 		else if(params[0].equals("Admin"))//Admin|playerSessionId|Action|parameters
 		{
 			Player thePlayer = AvalonServer.getPlayerById(params[1]);
@@ -153,10 +158,14 @@ class Websockets extends WebSocketServer {
 					System.out.println(thePlayer+" set "+role+" to "+amount);
 					thePlayer.myRoom.roles.put(Role.valueOf(role), Integer.parseInt(amount));
 				}
-				else if(action.equals("Start"))
+				else if(action.equals("StartGame"))
 				{
 					System.out.println(thePlayer+" started "+thePlayer.myRoom);
-					thePlayer.myRoom.startGame();
+					boolean good = thePlayer.myRoom.startGame();
+					if(!good)
+					{
+						thePlayer.send("GameStartError");
+					}
 				}
 			}
 		}

@@ -40,7 +40,7 @@ class BackendConnection {
 		if(params[0]=="RedirectToGame")
 		{
 			setGameId(params[1]);
-			this.sendJoinGame(cookies.sessionId, params[1]);
+			this.sendJoinGame(params[1]);
 		}
 		if(params[0]=="UpdatedName")
 		{
@@ -62,6 +62,10 @@ class BackendConnection {
 		{
 			//getKicked();
 		}
+		if(params[0]=="GameStartError")
+		{
+			//getKicked();
+		}
 	}
 
 	onError(evt) {
@@ -77,9 +81,9 @@ class BackendConnection {
 		console.log("->: " + message);
 	}
 
-	sendJoinGame(sessionId, gameId)
+	sendJoinGame(gameId)
 	{
-		this.send("JoinGame|"+sessionId+"|"+gameId);
+		this.send("JoinGame|"+cookies.sessionId+"|"+gameId);
 	}
 	
 	sendCreateGame()
@@ -87,14 +91,14 @@ class BackendConnection {
 		this.send("CreateGame");
 	}
 	
-	sendUpdateName(sessionId, newName)
+	sendUpdateName(newName)
 	{
-		this.send("UpdateName|"+sessionId+"|"+newName);
+		this.send("UpdateName|"+cookies.sessionId+"|"+newName);
 	}
 	
-	setRoleCount(sessionId, gameId, roleName, number)
+	setRoleCount(gameId, roleName, number)
 	{
-		this.send("Admin|"+sessionId+"|"+gameId+"|SetRole|"+roleName+"|"+number);
+		this.send("Admin|"+cookies.sessionId+"|"+gameId+"|SetRole|"+roleName+"|"+number);
 	}
 	
 	sendKick(targetId)
@@ -105,6 +109,16 @@ class BackendConnection {
 	sendPromote(targetId)
 	{
 		this.send("Admin|"+cookies.sessionId+"|Promote|"+targetId);
+	}
+	
+	sendStartGame()
+	{
+		this.send("Admin|"+cookies.sessionId+"|StartGame");
+	}
+	
+	sendLeaveGame()
+	{
+		this.send("LeaveGame|"+cookies.sessionId);
 	}
 	
 	checkLobbyOpen(gameId)

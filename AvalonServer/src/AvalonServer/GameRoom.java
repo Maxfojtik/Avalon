@@ -128,9 +128,9 @@ public class GameRoom
 			i++;
 		}
 	}
-	void startGame()
+	boolean startGame()
 	{
-		
+		return true;
 	}
 	void nameUpdated(Player thePlayer)
 	{
