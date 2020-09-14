@@ -129,7 +129,8 @@ $(document).ready(function(){
 		else
 			$("#join-game-button").prop("disabled", "disabled");
 	});
-	$('#txtSearchProdAssign').keypress(function (e) {
+	$('#input-game-code').keypress(function (e) {
+		console.log(e.which)
 		if(e.which == 13)  // the enter key code
 			$('#join-game-button').click();
 	}); 
