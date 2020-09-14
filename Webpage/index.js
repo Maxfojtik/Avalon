@@ -102,18 +102,20 @@ function addPlayerToLobby(sessionId, name, isHost) {
   kickIcon.src = "Images/kick.png";
   kickIcon.classList.add("icon")
   if (!isHost && selfIsHost)
-  	kickIcon.classList.add("kick-icon-fade");
+  	kickIcon.classList.add("icon-fade");
   else
-	  kickIcon.classList.add("kick-icon-hidden");
+	  kickIcon.classList.add("icon-hidden");
+	kickIcon.onclick = function() {  };
 	newPlayerCard.appendChild(kickIcon);
 
   var hostIcon = document.createElement('img'); 
   hostIcon.src = "Images/crown.png";
   hostIcon.classList.add("icon")
   if (!isHost && selfIsHost)
-  	hostIcon.classList.add("host-icon-fade");
-  else
-	  hostIcon.classList.add("host-icon-hidden");
+  	hostIcon.classList.add("icon-fade");
+  else if (!isHost)
+	  hostIcon.classList.add("icon-hidden");
+	kickIcon.onclick = function() {  };
 	newPlayerCard.appendChild(hostIcon);
 
 	$('#lobby-player-list').append(newPlayerCard);
