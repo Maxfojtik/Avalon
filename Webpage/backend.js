@@ -46,14 +46,14 @@ class BackendConnection {
 		{
 			changePlayerNameLobby(params[1], params[2]);
 		}
-		if(params[0]=="PlayerJoinedGame")
+		/*if(params[0]=="PlayerJoinedGame")
 		{
 			addPlayerToLobby(params[1], params[2]);
 		}
 		if(params[0]=="PlayerLeftGame")
 		{
 			removePlayerCardLobby(params[1]);
-		}
+		}*/
 		if(params[0]=="Players")
 		{
 			remakePlayerCards(params.splice(1));
