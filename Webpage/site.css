@@ -130,11 +130,19 @@ body {
   float: right;
   padding-right: 10px;
 }
-.kick-icon-hidden {
+.icon-hidden {
   display: none;
 }
-.host-icon-hidden {
-  display: none;
+.icon-fade {
+  opacity: 0;
+  transition: opacity 200ms;
+}
+.player-card:hover > .icon-fade {
+  opacity: .5;
+}
+.player-card:hover > .icon-fade:hover {
+  opacity: 1;
+  cursor: pointer;
 }
 
 .key {

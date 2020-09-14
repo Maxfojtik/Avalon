@@ -102,18 +102,20 @@ function addPlayerToLobby(sessionId, name, isHost) {
   kickIcon.src = "Images/kick.png";
   kickIcon.classList.add("icon")
   if (!isHost && selfIsHost)
-  	kickIcon.classList.add("kick-icon-fade");
+  	kickIcon.classList.add("icon-fade");
   else
-	  kickIcon.classList.add("kick-icon-hidden");
+	  kickIcon.classList.add("icon-hidden");
+	kickIcon.onclick = function() { connection.sendKick(sessionId) };
 	newPlayerCard.appendChild(kickIcon);
 
   var hostIcon = document.createElement('img'); 
   hostIcon.src = "Images/crown.png";
   hostIcon.classList.add("icon")
   if (!isHost && selfIsHost)
-  	hostIcon.classList.add("host-icon-fade");
-  else
-	  hostIcon.classList.add("host-icon-hidden");
+  	hostIcon.classList.add("icon-fade");
+  else if (!isHost)
+	  hostIcon.classList.add("icon-hidden");
+	kickIcon.onclick = function() { connection.sendPromote(sessionId) };
 	newPlayerCard.appendChild(hostIcon);
 
 	$('#lobby-player-list').append(newPlayerCard);
@@ -129,7 +131,8 @@ $(document).ready(function(){
 		else
 			$("#join-game-button").prop("disabled", "disabled");
 	});
-	$('#txtSearchProdAssign').keypress(function (e) {
+	$('#input-game-code').keypress(function (e) {
+		console.log(e.which)
 		if(e.which == 13)  // the enter key code
 			$('#join-game-button').click();
 	}); 
