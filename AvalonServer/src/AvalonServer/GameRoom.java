@@ -56,11 +56,12 @@ public class GameRoom
 	}
 	void playerJoined(Player player)
 	{
+		players.add(player);
 		for(int i = 0; i < players.size(); i++)
 		{
-			players.get(i).send("PlayerJoinedGame|"+player.publicSessionId+"|"+player.name);
+			players.get(i).send("Players"+generatePlayers(player));
+//			players.get(i).send("PlayerJoinedGame|"+player.publicSessionId+"|"+player.name);
 		}
-		players.add(player);
 	}
 	boolean isPlayerInGame(Player p)
 	{
@@ -76,7 +77,8 @@ public class GameRoom
 		players.remove(p);
 		for(int i = 0; i < players.size(); i++)
 		{
-			players.get(i).send("PlayerLeftGame|"+p.publicSessionId);
+			players.get(i).send("Players"+generatePlayers(p));
+//			players.get(i).send("PlayerLeftGame|"+p.publicSessionId);
 		}
 	}
 	boolean isLobbyOpen()

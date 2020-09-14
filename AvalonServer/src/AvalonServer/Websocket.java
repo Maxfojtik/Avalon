@@ -22,8 +22,11 @@ class Websockets extends WebSocketServer {
 	public void onClose(WebSocket conn, int code, String reason, boolean remote) {
 		System.out.println(conn.getRemoteSocketAddress().getAddress().getHostAddress() + " disconnected");
 		Player dcedPlayer = AvalonServer.getPlayerByWebsocket(conn);
-		dcedPlayer.socket = null;
-		dcedPlayer.disconnectTime = System.currentTimeMillis();
+		if(dcedPlayer!=null)
+		{
+			dcedPlayer.socket = null;
+			dcedPlayer.disconnectTime = System.currentTimeMillis();
+		}
 //		AvalonServer.playerDisconnected(dcedPlayer);
 	}
 
@@ -39,7 +42,7 @@ class Websockets extends WebSocketServer {
 			AvalonServer.gameRooms.add(room);
 			conn.send("RedirectToGame|"+room.id);
 		}
-		if(params[0].equals("JoinGame"))
+		else if(params[0].equals("JoinGame"))
 		{
 			Player thatPlayer = AvalonServer.getPlayerById(params[1]);
 			if(thatPlayer!=null)
@@ -57,7 +60,7 @@ class Websockets extends WebSocketServer {
 				}
 			}
 		}
-		if(params[0].equals("PlayerConnect"))
+		else if(params[0].equals("PlayerConnect"))
 		{
 			System.out.println(params[1] + " connecting");
 			String sessionId = params[1];
@@ -76,7 +79,7 @@ class Websockets extends WebSocketServer {
 			else
 			{
 				Player newPlayer = new Player(sessionId, conn);
-				if(params.length>1)
+				if(params.length>2)
 				{
 					newPlayer.name = params[2];
 				}
@@ -84,7 +87,7 @@ class Websockets extends WebSocketServer {
 				conn.send("UpdateState|"+newPlayer.s.toString());
 			}
 		}
-		if(params[0].equals("LobbyOpen"))
+		else if(params[0].equals("LobbyOpen"))
 		{
 			System.out.print(params[1]+" open? ");
 			GameRoom room = GameRoom.getById(params[1]);
@@ -107,7 +110,7 @@ class Websockets extends WebSocketServer {
 				conn.send("LobbyOpen|"+false);
 			}
 		}
-		if(params[0].equals("UpdateName"))//Admin|playerSessionId|Gameid|Action|parameters
+		else if(params[0].equals("UpdateName"))
 		{
 			Player thePlayer = AvalonServer.getPlayerById(params[1]);
 			if(params.length>2)
@@ -119,7 +122,7 @@ class Websockets extends WebSocketServer {
 				thePlayer.setName("");
 			}
 		}
-		if(params[0].equals("Admin"))//Admin|playerSessionId|Gameid|Action|parameters
+		else if(params[0].equals("Admin"))//Admin|playerSessionId|Gameid|Action|parameters
 		{
 			GameRoom theRoom = GameRoom.getById(params[2]);
 			if(theRoom!=null)
@@ -137,7 +140,7 @@ class Websockets extends WebSocketServer {
 							theRoom.removePlayer(targetPlayer);
 						}
 					}
-					if(action.equals("Promote"))
+					else if(action.equals("Promote"))
 					{
 						Player targetPlayer = AvalonServer.getPlayerById(params[4]);
 						System.out.println(thePlayer+" promoted "+targetPlayer);
@@ -146,14 +149,14 @@ class Websockets extends WebSocketServer {
 							theRoom.promote(targetPlayer);
 						}
 					}
-					if(action.equals("SetRole"))
+					else if(action.equals("SetRole"))
 					{
 						String role = params[4];
 						String amount = params[5];
 						System.out.println(thePlayer+" set "+role+" to "+amount);
 						theRoom.roles.put(Role.valueOf(role), Integer.parseInt(amount));
 					}
-					if(action.equals("Start"))
+					else if(action.equals("Start"))
 					{
 						System.out.println(thePlayer+" started "+theRoom);
 						theRoom.startGame();

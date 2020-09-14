@@ -39,7 +39,6 @@ public class Player
 	}
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return name+"("+sessionID+")";
 	}
 	void setRoom(GameRoom gr)
