@@ -59,7 +59,7 @@ public class GameRoom
 		players.add(player);
 		for(int i = 0; i < players.size(); i++)
 		{
-			players.get(i).send("Players"+generatePlayers(player));
+			players.get(i).send("Players"+generatePlayers(players.get(i)));
 //			players.get(i).send("PlayerJoinedGame|"+player.publicSessionId+"|"+player.name);
 		}
 	}
@@ -77,7 +77,7 @@ public class GameRoom
 		players.remove(p);
 		for(int i = 0; i < players.size(); i++)
 		{
-			players.get(i).send("Players"+generatePlayers(p));
+			players.get(i).send("Players"+generatePlayers(players.get(i)));
 //			players.get(i).send("PlayerLeftGame|"+p.publicSessionId);
 		}
 	}

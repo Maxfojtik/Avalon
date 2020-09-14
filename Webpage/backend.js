@@ -93,6 +93,16 @@ class BackendConnection {
 		this.send("Admin|"+sessionId+"|"+gameId+"|SetRole|"+roleName+"|"+number);
 	}
 	
+	sendKick(targetId)
+	{
+		this.send("Admin|"+cookies.sessionId+"|Kick|"+targetId);
+	}
+	
+	sendPromote(targetId)
+	{
+		this.send("Admin|"+cookies.sessionId+"|Promote|"+targetId);
+	}
+	
 	checkLobbyOpen(gameId)
 	{
 		this.send("LobbyOpen|"+gameId);
