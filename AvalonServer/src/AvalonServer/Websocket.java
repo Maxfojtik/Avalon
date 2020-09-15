@@ -72,6 +72,7 @@ class Websockets extends WebSocketServer {
 				conn.send("UpdateState|"+thatPlayer.s.toString());
 				if(thatPlayer.myRoom!=null)
 				{
+					thatPlayer.myRoom.sendRoleCounts(thatPlayer);
 					conn.send("Players"+thatPlayer.myRoom.generatePlayers(thatPlayer));
 					conn.send("GameId|"+thatPlayer.myRoom.id);
 				}
@@ -162,7 +163,7 @@ class Websockets extends WebSocketServer {
 					String role = params[3];
 					String amount = params[4];
 					System.out.println(thePlayer+" set "+role+" to "+amount);
-					thePlayer.myRoom.roles.put(Role.valueOf(role), Integer.parseInt(amount));
+					thePlayer.myRoom.setRole(thePlayer, role, amount);
 				}
 				else if(action.equals("StartGame"))
 				{

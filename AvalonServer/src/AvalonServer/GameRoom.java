@@ -4,6 +4,9 @@ import java.security.SecureRandom;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Set;
+
+import AvalonServer.GameRoom.Role;
 
 public class GameRoom 
 {
@@ -70,11 +73,25 @@ public class GameRoom
 	void playerJoined(Player player)
 	{
 		players.add(player);
+		sendRoleCounts(player);
 		for(int i = 0; i < players.size(); i++)
 		{
 			players.get(i).send("Players"+generatePlayers(players.get(i)));
 //			players.get(i).send("PlayerJoinedGame|"+player.publicSessionId+"|"+player.name);
 		}
+	}
+	void sendRoleCounts(Player p)
+	{
+		StringBuilder sb = new StringBuilder();
+		Set<Role> roleKeys = roles.keySet();
+		for(Role role : roleKeys)
+		{
+			sb.append("|");
+			sb.append(role);
+			sb.append("|");
+			sb.append(roles.get(role));
+		}
+		p.send("AllRoles"+sb.toString());
 	}
 	boolean isPlayerInGame(Player p)
 	{
@@ -94,6 +111,17 @@ public class GameRoom
 		{
 			players.get(i).send("Players"+generatePlayers(players.get(i)));
 //			players.get(i).send("PlayerLeftGame|"+p.publicSessionId);
+		}
+	}
+	void setRole(Player host, String role, String amount)
+	{
+		roles.put(Role.valueOf(role), Integer.parseInt(amount));
+		for(int i = 0; i < players.size(); i++)
+		{
+			if(!players.get(i).equals(host))
+			{
+				sendRoleCounts(players.get(i));
+			}
 		}
 	}
 	boolean isLobbyOpen()
