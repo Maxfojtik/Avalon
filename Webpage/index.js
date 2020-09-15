@@ -158,8 +158,16 @@ function addPlayerToLobby(sessionId, name, isHost) {
 function adjustRoleAmount(role, adjustBy) {
 	console.log("Adjusting "+role+" by "+adjustBy);
 	newCount = parseInt($("#role-count-"+role).text()) + adjustBy;
-	$("#role-count-"+role).text(newCount)
+	updateRoleAmount(role, newCount)
 	connection.setRoleCount(role, newCount)
+}
+function updateAllRoleAmounts(roles) { // [role1, count1, role2, count2...]
+	for (var i=0; i<roles.length; i+=2) {
+		updateRoleAmount(roles[i], roles[i+1])
+	}
+}
+function updateRoleAmount(role, count) {
+	$("#role-count-"+role).text(count)
 }
 
 $(document).ready(function(){
