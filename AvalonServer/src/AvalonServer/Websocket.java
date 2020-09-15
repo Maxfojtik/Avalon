@@ -125,7 +125,13 @@ class Websockets extends WebSocketServer {
 		else if(params[0].equals("LeaveGame"))
 		{
 			Player thePlayer = AvalonServer.getPlayerById(params[1]);
-			thePlayer.myRoom.removePlayer(thePlayer);
+			GameRoom theRoom = thePlayer.myRoom;
+			boolean lastPlayer = theRoom.players.size() == 1;
+			theRoom.removePlayer(thePlayer);
+			if(lastPlayer)
+			{
+				AvalonServer.disbandGame(theRoom);
+			}
 		}
 		else if(params[0].equals("Admin"))//Admin|playerSessionId|Action|parameters
 		{

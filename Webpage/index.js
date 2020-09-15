@@ -23,13 +23,28 @@ const Roles = {
 }
 
 function setState(state) {
-	$('#connecting-screen').find("h2").text("Connected.");
-	$('#connecting-screen').fadeTo(100, 0, function() { $('#connecting-screen').hide(); $('#error-screen').hide()});
-	$('#lobby-screen').fadeTo(100, 0)
-	$('#game-screen').fadeTo(100, 0)
-	$('#main-menu-screen').fadeTo(100, 0, function() { setStateFinal(state) })
+	if($('#connecting-screen:hidden').length == 0)
+	{
+		$('#connecting-screen').find("h2").text("Connected.");
+		$('#connecting-screen').fadeTo(100, 0, function() { $('#connecting-screen').hide(); $('#error-screen').hide()});
+	}
+	if($('#lobby-screen:hidden').length == 0)
+	{
+		$('#lobby-screen').fadeTo(100, 0);
+	}
+	if($('#game-screen:hidden').length == 0)
+	{
+		$('#game-screen').fadeTo(100, 0);
+	}
+	console.log($('#main-menu-screen:hidden').length == 1);
+	if($('#main-menu-screen:hidden').length == 0)
+	{
+		$('#main-menu-screen').fadeTo(100, 0);
+	}
+	setTimeout(function() { setStateFinal(state) }, 100);
 }
 function setStateFinal(state) {
+	console.log("show");
 	switch (state) {
 		case States.MAIN_MENU:
 			$('#lobby-screen').hide();

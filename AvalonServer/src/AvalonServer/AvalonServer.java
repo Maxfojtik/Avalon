@@ -60,4 +60,16 @@ public class AvalonServer
 		}
 		allPlayers.remove(dced);
 	}
+	static void disbandGame(GameRoom gr)
+	{
+		for(int i = 0; i < gameRooms.size(); i++)
+		{
+			if(gameRooms.get(i).equals(gr))
+			{
+				System.out.println(gameRooms+" disbanded");
+				gameRooms.remove(i);
+				i--;
+			}
+		}
+	}
 }
