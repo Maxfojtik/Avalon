@@ -64,7 +64,11 @@ class BackendConnection {
 		}
 		if(params[0]=="GameStartError")
 		{
-			//getKicked();
+			
+		}
+		if(params[0]=="AllRoles")
+		{
+			updateAllRoleAmounts(params.splice(1));
 		}
 	}
 
