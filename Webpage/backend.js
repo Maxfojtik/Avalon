@@ -96,9 +96,9 @@ class BackendConnection {
 		this.send("UpdateName|"+cookies.sessionId+"|"+newName);
 	}
 	
-	setRoleCount(gameId, roleName, number)
+	setRoleCount(roleName, number)
 	{
-		this.send("Admin|"+cookies.sessionId+"|"+gameId+"|SetRole|"+roleName+"|"+number);
+		this.send("Admin|"+cookies.sessionId+"|SetRole|"+roleName+"|"+number);
 	}
 	
 	sendKick(targetId)

@@ -13,7 +13,7 @@ public class GameRoom
 	}
 	static enum Role
 	{
-		GoodGuy, BadGuy, Merlin, Percival, Morgana, Oberon, Assassin
+		GoodGuy, BadGuy, Merlin, Percival, Morgana, Oberon, Assassin, Mordred
 	}
 	LinkedList<Player> players = new LinkedList<Player>();
 	String id;
@@ -30,7 +30,7 @@ public class GameRoom
 		created = new Date();
 		s = State.InLobby;
 	}
-	static final String CONS = "BCDFGHJLMNPQRSTVWXYZ";
+	static final String CONS = "BCDFGHJLMNPRSTVWXYZ";
 	static final String VOWELS = "AEIOU";
 	static SecureRandom rnd = new SecureRandom();
 	
