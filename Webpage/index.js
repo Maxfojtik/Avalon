@@ -11,6 +11,17 @@ const States = {
 	GAME: "InGame"
 };
 
+const Roles = {
+	GOOD: "GoodGuy",
+	BAD: "BadGuy",
+	MERLIN: "Merlin",
+	PERCIVAL: "Percival",
+	MORGANA: "Morgana",
+	MORDRED: "Mordred",
+	ASSASSIN: "Assassin",
+	OBERON: "Oberon"
+}
+
 function setState(state) {
 	$('#connecting-screen').find("h2").text("Connected.");
 	$('#connecting-screen').fadeTo(100, 0, function() { $('#connecting-screen').hide(); $('#error-screen').hide()});
@@ -24,7 +35,8 @@ function setStateFinal(state) {
 			$('#lobby-screen').hide();
 			$('#game-screen').hide();
 			$('#main-menu-screen').fadeTo(300, 1)
-			// Clear join game text box
+			clearMainMenu();
+			// Clear join game text box and remove room parameter from url
 			break;
 		case States.LOBBY:
 			$('#main-menu-screen').hide();
@@ -41,11 +53,18 @@ function setStateFinal(state) {
 	}
 }
 
+function clearMainMenu() {
+	console.log("making main menu")
+	$("#input-game-code").val("")
+	$("#input-game-code").focus()
+	$("#join-game-button").prop("disabled", "disabled");
+	window.history.replaceState(null, null, window.location.pathname);
+}
+
 // Joins a game from the start page. Will need to find the room code
 function joinGame() {
 	gameId = $("#input-game-code").val().toUpperCase()
 	connection.sendJoinGame(gameId);
-	console.log("Joining game")
 }
 // Asks server for a room code and then server will have us join game
 function createGame() {
@@ -121,6 +140,13 @@ function addPlayerToLobby(sessionId, name, isHost) {
 	$('#lobby-player-list').append(newPlayerCard);
 }
 
+function adjustRoleAmount(role, adjustBy) {
+	console.log("Adjusting "+role+" by "+adjustBy);
+	newCount = parseInt($("#role-count-"+role).text()) + adjustBy;
+	$("#role-count-"+role).text(newCount)
+	connection.setRoleCount(role, newCount)
+}
+
 $(document).ready(function(){
 	// Checks if the room code is valid via string checking and polling server. Enables join button only when valid
 	$('#input-game-code').on('input', function() {
@@ -135,8 +161,7 @@ $(document).ready(function(){
 		console.log(e.which)
 		if(e.which == 13)  // the enter key code
 			$('#join-game-button').click();
-	}); 
-	$('#input-game-code').focus()
+	});
 
 	$('#input-name-lobby').on('input', function() {
 		var name = $('#input-name-lobby').val()

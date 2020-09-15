@@ -57,9 +57,11 @@
 				<h2>Roles:</h2>
 				<div class="role-card good-role-card" id="#good-role-card">
 					<span>Minion of Arthur</span>
-					<button type="button" class="role-increase">-</button>
-					<span>0</span>
-					<button type="button" class="role-increase">+</button>
+					<span class="amount-adjust">
+						<button type="button" class="role-increase" onclick="adjustRoleAmount(Roles.GOOD, -1)">-</button>
+						<span id="role-count-GoodGuy">0</span>
+						<button type="button" class="role-increase" onclick="adjustRoleAmount(Roles.GOOD, 1)">+</button>
+					</span>
 				</div>
 			</div>
 

@@ -111,7 +111,7 @@ body {
   transition-duration: 0.4s;
   cursor: pointer;
   border: 1px solid #a0a0a0;
-  border-radius: 12px;
+  border-radius: 10px;
   text-align: center;
 }
 
@@ -176,6 +176,11 @@ body {
   margin-left: auto;
   margin-bottom: 3px;
   text-align: left;
+}
+
+.amount-adjust {
+  float: right;
+  margin-right: 15px;
 }
 
 .bottom-right {
