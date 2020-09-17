@@ -5,6 +5,9 @@ var connection = new BackendConnection()
 // Whether this client is the host
 var selfIsHost
 
+var numPlayers
+var numRolesSelected
+
 const States = {
 	MAIN_MENU: "InMainMenu",
 	LOBBY: "InLobby",
@@ -118,6 +121,7 @@ function changePlayerNameLobby(sessionId, newName) {
 
 function remakePlayerCards(players) { // [id1, name1, id2, name2, ...]
 	selfIsHost = players[0] == cookies.sessionId
+	numPlayers = players.length / 2
 	$("#lobby-player-list").empty()
 	for (var i=0; i<players.length; i+=2) {
 		addPlayerToLobby(players[i], players[i+1], i===0)
