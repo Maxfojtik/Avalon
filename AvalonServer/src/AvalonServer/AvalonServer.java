@@ -66,7 +66,7 @@ public class AvalonServer
 		{
 			if(gameRooms.get(i).equals(gr))
 			{
-				System.out.println(gameRooms+" disbanded");
+				System.out.println(gameRooms.get(i)+" disbanded");
 				gameRooms.remove(i);
 				i--;
 			}
