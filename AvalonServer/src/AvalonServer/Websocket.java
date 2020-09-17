@@ -168,6 +168,7 @@ class Websockets extends WebSocketServer {
 				else if(action.equals("StartGame"))
 				{
 					System.out.println(thePlayer+" started "+thePlayer.myRoom);
+					thePlayer.myRoom.assignRoles();
 					boolean good = thePlayer.myRoom.startGame();
 					if(!good)
 					{

@@ -146,18 +146,31 @@ public class GameRoom
 //			players.get(i).send("PlayerLeftGame|"+p.publicSessionId);
 		}
 	}
-	void assignRoles(LinkedList<Role> roles)
+	void assignRoles()
 	{
+		LinkedList<Role> linkedRoles = new LinkedList<Role>();
+		for(Role role : roles.keySet())
+		{
+			for(int i = 0; i < roles.get(role); i++)
+			{
+				linkedRoles.add(role);
+			}
+		}
 		assert roles.size() == players.size();
 		int i = 0;
 		while(roles.size()>0)
 		{
-			players.get(i).myRole = removeRandomly(roles);
+			players.get(i).myRole = removeRandomly(linkedRoles);
 			i++;
 		}
 	}
 	boolean startGame()
 	{
+		for(Player p : players)
+		{
+			p.s = Player.State.InGame;
+			p.send("UpdateState|"+p.s.toString());
+		}
 		return true;
 	}
 	void nameUpdated(Player thePlayer)
