@@ -1,4 +1,12 @@
 
+/*
+Player cards
+Mission List
+Actions
+Notes
+
+*/
+
 var cookies = new CookieMonster()
 var connection = new BackendConnection()
 
@@ -23,6 +31,10 @@ const Roles = {
 	MORDRED: "Mordred",
 	ASSASSIN: "Assassin",
 	OBERON: "Oberon"
+}
+
+function roleIsGood(role) {
+	return [Roles.GOOD, Roles.MERLIN, Roles.PERCIVAL]
 }
 
 function setState(state) {
@@ -67,6 +79,7 @@ function setStateFinal(state) {
 			$('#main-menu-screen').hide();
 			$('#lobby-screen').hide();
 			$('#game-screen').fadeTo(300, 1)
+			clearGame();
 			break;
 	}
 }
@@ -166,12 +179,46 @@ function adjustRoleAmount(role, adjustBy) {
 	connection.setRoleCount(role, newCount)
 }
 function updateAllRoleAmounts(roles) { // [role1, count1, role2, count2...]
+	numRolesSelected = roles.length / 2
 	for (var i=0; i<roles.length; i+=2) {
 		updateRoleAmount(roles[i], roles[i+1])
 	}
 }
 function updateRoleAmount(role, count) {
+	numRolesSelected += count
 	$("#role-count-"+role).text(count)
+}
+
+function checkStartGameButton() {
+	if (numRolesSelected >= 3)
+		return true
+	else
+		return false
+}
+
+function clearGame() {
+	
+}
+
+function populateGame(myRole, players, roles) {
+	createPlayerGameCards(players)
+	fillGameInfo(myRole, roles)
+}
+
+function createPlayerGameCards(players) {
+	var newPlayerCard = document.createElement('div');
+	newPlayerCard.setAttribute('class', 'player-card');
+	newPlayerCard.setAttribute('data-session-id', sessionId);
+
+	var playerName = document.createElement('span');
+	playerName.appendChild(document.createTextNode(name));
+	newPlayerCard.appendChild(playerName);
+
+	$('#game-player-list').append(newPlayerCard);
+}
+
+function fillGameInfo(myRole, roles) {
+
 }
 
 $(document).ready(function(){

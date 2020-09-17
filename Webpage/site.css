@@ -115,6 +115,10 @@ body {
   text-align: center;
 }
 
+#lobby-screen {
+  margin-bottom: 80px
+}
+
 #lobby-id {
   font-size: 50px;
   margin-top: 15px;
@@ -184,7 +188,22 @@ body {
 }
 
 .bottom-right {
-  position: absolute;
+  position: fixed;
   right: 10px;
   bottom: 10px;
 }
+
+.column {
+  float: left;
+  padding: 5px;
+}
+
+.left, .right {
+  width: 34%;
+}
+
+.middle {
+  width: 32%;
+}
+
+
